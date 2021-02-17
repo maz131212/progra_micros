@@ -16,7 +16,7 @@ PROCESSOR 16F887
 #include <xc.inc>
 
 ;configuration word 1
-CONFIG FOSC=XT	    // Oscilador Externo
+CONFIG FOSC=INTRC_NOCLKOUT  // Oscilador interno sin salidas
 CONFIG WDTE=OFF     // WDT disabled (reinicio repetitivo del pic)
 CONFIG PWRTE=ON     // PWRT enable (espera de 72ms al iniciar)
 CONFIG MCLRE=OFF    // El pin de MCLR se utiliza como I/O
@@ -38,8 +38,7 @@ CONFIG BOR4V=BOR40V // Reinicio abajo de 4V, (BOR21V=2.1V)
 ; Variables
 ;-------------------------------------------------------------------------------
 
-PSECT udata_bank0
-var:    DS 1, 1byte
+    
  
 ;-------------------------------------------------------------------------------
 ; Vector Reset
@@ -67,6 +66,7 @@ main:
     call config_io
     call config_reloj
     call config_tmr0
+    banksel PORTA
 
     
     
@@ -76,10 +76,14 @@ main:
 	
 loop:
     
-    btfss   T0IF    ;bandera de interrupcion para el timer0
-    goto    $-1
+    btfsc   T0IF    ;bandera de interrupcion para el timer0
+    call    incrementar
+    
+    btfsc   T0IF
     call    reiniciar_tmr0
-    incf    PORTA
+    
+    
+   
     goto    loop       
 
 
@@ -121,14 +125,9 @@ config_io:
 
 config_reloj:
     banksel OSCCON  
-
-    ;bcf     OSCCON, 6   ;oscilador de 500kHz
-    ;bsf     OSCCON, 5
-    ;bsf     OSCCON, 4
-
-    bcf     IRCF2   ;oscilador de 500kHz
+    bcf     IRCF2   ;oscilador de 250 kHz (010)
     bsf     IRCF1
-    bsf     IRFC0
+    bcf     IRCF0
     bsf     SCS     ;OSCILADOR INTERNO
 
     return
@@ -139,21 +138,22 @@ config_tmr0:
     bcf     T0CS    ;reloj interno 
     bcf     PSA     ;prescaler en tmr0
 
-    bsf     PS2     ;configurar el prescaler
+    bsf     PS2     ;configurar el prescaler (111 = 1:256)
     bsf     PS1
-    bcf     PS0
+    bsf     PS0
 
     banksel PORTA   ;bank0
     call reiniciar_tmr0
     return
 
 reiniciar_tmr0:
-    movlw   50
+    movlw   133
     movwf   TMR0
-    bcf     TOIF
+    bcf     T0IF
+    return
+    
+incrementar:
+    incf    PORTB
     return
 
 END
-;-------------------------------------------------------------------------------
-; FIN 
-;-------------------------------------------------------------------------------
