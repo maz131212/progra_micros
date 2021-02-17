@@ -38,6 +38,8 @@ CONFIG BOR4V=BOR40V // Reinicio abajo de 4V, (BOR21V=2.1V)
 ; Variables
 ;-------------------------------------------------------------------------------
 
+PSECT udata_bank0
+con7seg:    DS 1
     
  
 ;-------------------------------------------------------------------------------
@@ -55,13 +57,40 @@ resetVect:
     
     
 ;-------------------------------------------------------------------------------
-; Configuración
+; Tablas
 ;-------------------------------------------------------------------------------
 
 PSECT code, delta=2, abs
  
 ORG 100h    ;posición para el código
+tabla_7_seg:
+    clrf    PCLATH
+    bsf     PCLATH, 0   ; posición 01 00h el PC
+    andlw   00001111B   ; no saltar más del tamaño de la tabla
+    addwf   PCL         ;103h+1h + W = 106h
 
+    retlw   00111111B   ;0
+    retlw   00000110B   ;1
+    retlw   01011011B   ;2
+    retlw   01001111B   ;3
+    retlw   01100110B   ;4
+    retlw   01101101B   ;5
+    retlw   01111101B   ;6
+    retlw   00000111B   ;7
+    retlw   01111111B   ;8
+    retlw   01101111B   ;9
+    retlw   01110111B   ;A
+    retlw   01111100B   ;B
+    retlw   00111001B   ;C
+    retlw   01011110B   ;D
+    retlw   01111001B   ;E
+    retlw   01110001B   ;F
+    retlw   0
+ 
+;-------------------------------------------------------------------------------
+; Configuración
+;-------------------------------------------------------------------------------
+ 
 main:
     call config_io
     call config_reloj
@@ -77,10 +106,16 @@ main:
 loop:
     
     btfsc   T0IF    ;bandera de interrupcion para el timer0
-    call    incrementar
+    incf    PORTB
     
     btfsc   T0IF
     call    reiniciar_tmr0
+    
+    btfsc   PORTA, 0	   ;si el boton se preciona se va a incrementar 
+    call    incrementar    ;si no se preciona el boton se salta una linea
+    
+    btfsc   PORTA, 1
+    call    decrementar
     
     
    
@@ -151,9 +186,28 @@ reiniciar_tmr0:
     movwf   TMR0
     bcf     T0IF
     return
+
     
 incrementar:
-    incf    PORTB
+    btfss   PORTA, 0
+    goto    $-1
+    btfsc   PORTA, 0
+    goto    $-1
+    incf    con7seg
+    movf    con7seg, W
+    call    tabla_7_seg
+    movwf   PORTC
+    return
+    
+decrementar:
+    btfss   PORTA, 1
+    goto    $-1
+    btfsc   PORTA, 1
+    goto    $-1
+    decf    con7seg
+    movf    con7seg, W
+    call    tabla_7_seg
+    movwf   PORTC
     return
 
 END
