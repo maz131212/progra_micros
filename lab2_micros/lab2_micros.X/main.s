@@ -8,7 +8,7 @@
 ; Hardware:     LEDs en el puerto B, C y D
 ;
 ; Creado: 9 feb, 2021
-; Última modificación: 9 feb, 2021
+; Última modificación: 10 feb, 2021
 ;-------------------------------------------------------------------------------
 
     
@@ -76,7 +76,7 @@ PSECT resVect, class=CODE, abs, delta=2
 ORG 00h     ;posición 0000h para el reset
 	
 resetVect:
-    PAGESEL main
+    PAGESEL main    ;seleccionar pagina 
     goto main
 	
     
