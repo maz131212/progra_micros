@@ -2488,7 +2488,9 @@ CONFIG BOR4V=BOR40V
 
 PSECT udata_bank0
 con7seg: DS 1
-
+alarma: DS 1
+cont_small: DS 1
+cont_big: DS 1
 
 ;-------------------------------------------------------------------------------
 ; Vector Reset
@@ -2540,11 +2542,10 @@ tabla_7_seg:
 ;-------------------------------------------------------------------------------
 
 main:
-    call config_io
-    call config_reloj
-    call config_tmr0
+    call config_io ;configuracion entradas y salidas
+    call config_reloj ;configuracion del oscilador interno
+    call config_tmr0 ;configuracion del timer0
     banksel PORTA
-
 
 
 ;-------------------------------------------------------------------------------
@@ -2552,32 +2553,28 @@ main:
 ;-------------------------------------------------------------------------------
 
 loop:
-
-    btfsc ((INTCON) and 07Fh), 2 ;bandera de interrupcion para el timer0
+    btfsc ((INTCON) and 07Fh), 2 ;si la bandera es 1 se increenta el contador (puertoB)
     incf PORTB
 
-    btfsc ((INTCON) and 07Fh), 2
+    btfsc ((INTCON) and 07Fh), 2 ;si la bandera es 1 se reinicia el tmr0
     call reiniciar_tmr0
 
     btfsc PORTA, 0 ;si el boton se preciona se va a incrementar
     call incrementar ;si no se preciona el boton se salta una linea
 
-    btfsc PORTA, 1
-    call decrementar
+    btfsc PORTA, 1 ;si el boton se preciona se va a decrementar
+    call decrementar ;si no se preciona el boton se salta una linea
 
-
+    call igualdad ;compara si los contadores son iguales
 
     goto loop
-
 
 
 ;-------------------------------------------------------------------------------
 ; Subrutinas
 ;-------------------------------------------------------------------------------
 
-
 config_io:
-
     banksel ANSEL
     clrf ANSEL ;pines digitales puerto A
     clrf ANSELH ;pines digitales puerto B
@@ -2594,16 +2591,13 @@ config_io:
     bsf TRISB, 7 ;puerto ((PORTB) and 07Fh), 7 como entrada
 
     clrf TRISC ;puerto C como salida
-
     clrf TRISD ;puerto D como salida
-
 
     banksel PORTA
     clrf PORTA ;puerto A en 0
     clrf PORTB ;puerto B en 0
     clrf PORTC ;puerto C en 0
     clrf PORTD ;puerto D en 0
-
     return
 
 config_reloj:
@@ -2612,12 +2606,10 @@ config_reloj:
     bsf ((OSCCON) and 07Fh), 5
     bcf ((OSCCON) and 07Fh), 4
     bsf ((OSCCON) and 07Fh), 0 ;OSCILADOR INTERNO
-
     return
 
 config_tmr0:
     banksel OPTION_REG
-
     bcf ((OPTION_REG) and 07Fh), 5 ;reloj interno
     bcf ((OPTION_REG) and 07Fh), 3 ;prescaler en tmr0
 
@@ -2630,32 +2622,66 @@ config_tmr0:
     return
 
 reiniciar_tmr0:
-    movlw 133
+    movlw 133 ;N para obtener 0.5seg de delay
     movwf TMR0
-    bcf ((INTCON) and 07Fh), 2
+    bcf ((INTCON) and 07Fh), 2 ;apagar la bandera del tmr0
     return
 
 
 incrementar:
-    btfss PORTA, 0
+    btfss PORTA, 0 ;antirrebote
     goto $-1
     btfsc PORTA, 0
     goto $-1
-    incf con7seg
-    movf con7seg, W
-    call tabla_7_seg
-    movwf PORTC
+    incf con7seg ;incrementar el contador
+    movf con7seg, W ;contador a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf PORTC ;mostrar el valor en el 7 segmentos
     return
 
+
 decrementar:
-    btfss PORTA, 1
+    btfss PORTA, 1 ;antirrebote
     goto $-1
     btfsc PORTA, 1
     goto $-1
-    decf con7seg
-    movf con7seg, W
-    call tabla_7_seg
-    movwf PORTC
+    decf con7seg ;decrementar el contador
+    movf con7seg, W ;contador a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf PORTC ;mostrar el valor en el 7 segmentos
     return
+
+
+igualdad:
+    movf PORTB, W ;pueto B a el acumulador
+    subwf con7seg, W ;restar acumulador y 7seg, respuesta en el acumulador
+    btfss STATUS, 2 ;--Z-- si Z=0 no es igual, si Z=1 es igual
+    goto noigual
+
+    call delay_big ;espera un poco
+    bsf PORTD, 0 ;encender la alarma
+    clrf PORTB ;reinicar el contador del tmr0 (puerto B)
+    call delay_big ;delay para ver la alarma
+    call reiniciar_tmr0 ;reiniciar tmr0
+noigual:
+    bcf PORTD, 0 ;apagar la alarma
+    return
+
+
+delay_big:
+    movlw 200 ;valor inicial del contador
+    movwf cont_big
+    call delay_small ;rutina de delay
+    decfsz cont_big, 1 ;decrementar el contador
+    goto $-2 ;ejecutar dos lineas atras
+    return
+
+delay_small:
+    movlw 32 ;valor inicial del contador
+    movwf cont_small
+    decfsz cont_small, 1 ;decrementar el contador
+    goto $-1 ;ejecutar linea anterior
+    return
+
 
 END
