@@ -11,7 +11,7 @@
 ; Hardware:
 ;
 ; Creado: 23 feb, 2021
-; Última modificación: 23 feb, 2021
+; Última modificación: 27 feb, 2021
 ;-------------------------------------------------------------------------------
 
 
@@ -2599,6 +2599,7 @@ main:
 
 loop:
 
+    call display1
 
 
     goto loop
@@ -2665,7 +2666,11 @@ config_iocportb:
     bcf ((INTCON) and 07Fh), 0
     return
 
-
+display1:
+    movf PORTA, W ;contador a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf PORTC ;mostrar el valor en el 7 segmentos
+    return
 
 
 
