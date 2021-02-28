@@ -4,8 +4,13 @@
 ; Autor:	Axel Mazariegos
 ; Compilador:	pic-as, MPLABX V5.40
 ;
-; Programa:     
-; Hardware:     
+; Programa: contador en PORTA controlado por interrupciones de cambio del PORTB
+;	    contador en PORTD controlado por interrupciones del Timer0
+;    
+; Hardware: LEDs en PORTA
+;	    Botones en PORTB
+;	    Display 7 Segmentos en PORTC
+;	    Display 7 Segmentos en PORTD
 ;
 ; Creado: 23 feb, 2021
 ; Última modificación: 27 feb, 2021
@@ -32,26 +37,22 @@ CONFIG LVP=ON       // Programación en bajo voltaje permitida
 CONFIG WRT=OFF      // Protección de autoescritura por el programa desactivada
 CONFIG BOR4V=BOR40V // Reinicio abajo de 4V, (BOR21V=2.1V)
 
-  
-    
+     
 ;-------------------------------------------------------------------------------
 ; Variables
 ;-------------------------------------------------------------------------------
-
 PSECT udata_shr
- W_TEMP:	DS  1
- STATUS_TEMP:	DS  1
+W_TEMP:		DS  1
+STATUS_TEMP:	DS  1
     
 PSECT udata_bank0
-con7seg:    DS 1
-alarma:	    DS 1
-cont_small: DS 1    
-cont_big:   DS 1   
+con7seg:	DS 1
+cont:		DS  1    
+ 
  
 ;-------------------------------------------------------------------------------
 ; Vector Reset
 ;-------------------------------------------------------------------------------
-
 PSECT resVect, class=CODE, abs, delta=2
 
 ORG 00h     ;posición 0000h para el reset
@@ -60,52 +61,52 @@ resetVect:
     PAGESEL main    ;seleccionar pagina 
     goto main
 	
+    
 ;-------------------------------------------------------------------------------
 ; Vector de Interrupcion
 ;-------------------------------------------------------------------------------
-
-PSECT resVect, class=CODE, abs, delta=2
+PSECT intVect, class=CODE, abs, delta=2
 
 ORG 04h     ;posición 0004h para las interrupciones
 	
 push:
-    movf    W_TEMP
-    swapf   STATUS, W
-    movwf   STATUS_TEMP
-    
-    
+    movf    W_TEMP	;guardar W en una variable temporal
+    swapf   STATUS, W	;inveritr los valores de STATUS
+    movwf   STATUS_TEMP	;guardar STATUS en una variable temporal
+     
 isr:
     ;---------------------------------------------------------------------------
     ; IOC puerto B
     ;---------------------------------------------------------------------------
-    btfss   RBIF
-    goto    pop 
-    btfss   PORTB, 0	    ;si el boton se preciona se va a incrementar 
-    incf    PORTA	    ;si no se preciona el boton se salta una linea
-    btfss   PORTB, 1	    ;si el boton se preciona se va a decrementar
-    decf    PORTA	    ;si no se preciona el boton se salta una linea 
-    bcf	    RBIF
+    btfss   RBIF	;revisar la bandera del IOC-PORTB
+    goto    $+5 
+    btfss   PORTB, 0	;si el boton se preciona se va a incrementar 
+    incf    PORTA	;si no se preciona el boton se salta una linea
+    btfss   PORTB, 1	;si el boton se preciona se va a decrementar
+    decf    PORTA	;si no se preciona el boton se salta una linea 
+    bcf	    RBIF	;apagar la bandera del IOC-PORTB
     
     ;---------------------------------------------------------------------------
     ; Interrupcion Timer0
     ;---------------------------------------------------------------------------
-    
-    
-
+    btfss   T0IF    ;revisar la bandera del tmr0
+    goto    pop
+    movlw   178	    ;N para obtener 50ms de delay
+    movwf   TMR0    ;t_deseado = 4*(1/Fosc)*(256-N)*Prescaler
+    bcf     T0IF    ;apagar la bandera del tmr0
+    incf    cont    ;aumentar contador para luego compararlo 
+         
 pop:
-    swapf   STATUS_TEMP, W
-    movwf   STATUS
-    swapf   W_TEMP, F
-    swapf   W_TEMP, W
+    swapf   STATUS_TEMP, W  ;inveritr los valores de STATUS
+    movwf   STATUS	    ;regresar STATUS 
+    swapf   W_TEMP, F	    ;inveritr los valores de W
+    swapf   W_TEMP, W	    ;inveritr los valores de W y regresarlo
     retfie
-
-
 
     
 ;-------------------------------------------------------------------------------
 ; Tablas
 ;-------------------------------------------------------------------------------
-
 PSECT code, delta=2, abs
  
 ORG 100h    ;posición para el código
@@ -113,7 +114,7 @@ tabla_7_seg:
     clrf    PCLATH
     bsf     PCLATH, 0   ; posición 01 00h el PC
     andlw   00001111B   ; no saltar más del tamaño de la tabla
-    addwf   PCL         ;103h+1h + W = 106h
+    addwf   PCL         ; 103h+1h + W 
     
     retlw   00111111B   ;0
     retlw   00000110B   ;1
@@ -136,23 +137,22 @@ tabla_7_seg:
 ;-------------------------------------------------------------------------------
 ; Configuración
 ;-------------------------------------------------------------------------------
- 
 main:
     call config_int	;configuracion interrupciones
     call config_io	;configuracion entradas y salidas
     call config_reloj	;configuracion del oscilador interno
-    call config_iocportb
+    call config_ioc	;configuración interrupt on change PORTB
+    call config_tmr0	;configuracion del timer0	
     banksel PORTA
 
     
 ;-------------------------------------------------------------------------------
 ; Loop principal
-;-------------------------------------------------------------------------------
-	
+;-------------------------------------------------------------------------------	
 loop: 
     
-    call display1
-     
+    call displayC   ;mostar el contador del PORTA en el 7seg del PORTC
+    call comparar   ;revisar si ya paso 1seg para aumentar el 7seg del PORTD
     
     goto    loop       
 
@@ -199,34 +199,66 @@ config_reloj:
     bcf     IRCF0
     bsf     SCS     ;OSCILADOR INTERNO
     return
+
+    
+config_tmr0:
+    banksel OPTION_REG
+    bcf     T0CS    ;reloj interno 
+    bcf     PSA     ;prescaler en tmr0
+    bsf     PS2     ;configurar el prescaler (111 = 1:256)
+    bsf     PS1
+    bsf     PS0
+    call reiniciar_tmr0
+    return
+
+reiniciar_tmr0:
+    banksel PORTA   ;bank0
+    movlw   178	    ;N para obtener 50ms de delay
+    movwf   TMR0    ;t_deseado = 4*(1/Fosc)*(256-N)*Prescaler
+    bcf     T0IF    ;apagar la bandera del tmr0
+    return
+    
     
 config_int:
     banksel INTCON
-    bsf	    INTCON, 7	;GIE=1 habilitar las interrupciones globales
-    bsf	    INTCON, 3	;RBIE=1 habilitar interrupciones de cambio puertoB
-    bcf	    RBIF
-    ;bsf	    INTCON, 2	;T0IF=1 habilitar interrupciones Timer0
+    bsf	    GIE		;GIE=1 habilitar las interrupciones globales
+    bsf	    RBIE    	;RBIE=1 habilitar interrupciones de cambio puertoB
+    bcf	    RBIF	;apagar la bandera del IOC-PORTB
+    bsf	    T0IE	;T0IE=1 habilitar interrupciones Timer0
+    bcf	    T0IF	;apagar la bandera del tmr0
     return
 
-config_iocportb:
+    
+config_ioc:
     banksel IOCB
     bsf	    IOCB, 0	;habilitar interrupt-on-change RB0
     bsf	    IOCB, 1	;habilitar interrupt-on-change RB1
-    
-    banksel PORTB
-    movf    PORTB, W
-    bcf	    RBIF
     return
     
-display1: 
+    
+displayC: 
     movf    PORTA, W	;contador a acumulador
     call    tabla_7_seg	;obtner el valor correcto en el acumulador
     movwf   PORTC	;mostrar el valor en el 7 segmentos
     return
+
     
+comparar:
+    movf    cont, W
+    sublw   50
+    btfss   STATUS, 2	;-ZERO- si Z=0 no es igual, si Z=1 es igual
+    goto    noigual
+    clrf    cont    
+    incf    con7seg	;incrementar el contador
+noigual:
+    call    displayD
+    return
+    
+displayD:
+    movf    con7seg, W	;contador a acumulador
+    call    tabla_7_seg	;obtner el valor correcto en el acumulador
+    movwf   PORTD	;mostrar el valor en el 7 segmentos
+    return
     
     
 END
-
-
-
