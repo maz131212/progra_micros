@@ -46,8 +46,13 @@ W_TEMP:		DS  1
 STATUS_TEMP:	DS  1
     
 PSECT udata_bank0
-con7seg:	DS 1
-cont:		DS  1    
+nibble0:    DS 1
+nibble1:    DS 1
+display0:   DS 1
+display1:   DS 1
+con7seg:    DS 1
+banderas:   DS 1
+cont:	DS  1    
  
  
 ;-------------------------------------------------------------------------------
@@ -79,7 +84,7 @@ isr:
     ; IOC puerto B
     ;---------------------------------------------------------------------------
     btfss   RBIF	;revisar la bandera del IOC-PORTB
-    goto    pop
+    goto    $+9
     btfss   PORTB, 0	;si el boton se preciona se va a incrementar 
     incf    PORTA	;si no se preciona el boton se salta una linea
     btfss   PORTB, 0
@@ -89,6 +94,34 @@ isr:
     btfss   PORTB, 1
     goto    $-1
     bcf	    RBIF	;apagar la bandera del IOC-PORTB
+    
+    ;---------------------------------------------------------------------------
+    ; Interrupcion Timer0
+    ;---------------------------------------------------------------------------
+    btfss   T0IF    ;revisar la bandera del tmr0
+    goto    pop
+    movlw   217	    ;N para obtener 10ms de delay
+    movwf   TMR0    ;t_deseado = 4*(1/Fosc)*(256-N)*Prescaler
+    incf    PORTD
+    
+    bcf	    PORTB, 6	
+    bcf	    PORTB, 7
+    btfsc   banderas, 0
+    goto    dis1
+    movf    display0, W
+    movwf   PORTC
+    bsf	    PORTB, 6
+    goto    siguiente
+dis1:
+    movf    display1, W
+    movwf   PORTC
+    bsf	    PORTB, 7
+siguiente:
+    movlw   1
+    xorwf   banderas, F
+    
+    bcf     T0IF    ;apagar la bandera del tmr0
+    
     
          
 pop:
@@ -136,6 +169,7 @@ main:
     call config_io	;configuracion entradas y salidas
     call config_int	;configuracion interrupciones
     call config_reloj	;configuracion del oscilador interno	
+    call config_tmr0
     banksel PORTA
 
     
@@ -144,7 +178,8 @@ main:
 ;-------------------------------------------------------------------------------	
 loop: 
     
-    call displayC   ;mostar el contador del PORTA en el 7seg del PORTC
+    call separar_nibbles 
+    call preparar_displays
     
     goto    loop       
 
@@ -153,6 +188,24 @@ loop:
 ; Subrutinas 
 ;-------------------------------------------------------------------------------
 
+separar_nibbles:
+    movf    PORTA, W	;Contador a acumulador
+    andlw   0x0F	;Dejar solo los 4 bits menos significativos
+    movwf   nibble0	
+    swapf   PORTA, W	;Invertir los valores del contador 
+    andlw   0x0F	;Dejar solo los 4 bits menos significativos
+    movwf   nibble1	
+    return 
+
+preparar_displays:
+    movf    nibble0, W	;variable0 a acumulador
+    call    tabla_7_seg	;obtner el valor correcto en el acumulador
+    movwf   display0	
+    movf    nibble1, W	;variable1 a acumulador
+    call    tabla_7_seg	;obtner el valor correcto en el acumulador
+    movwf   display1
+    return
+    
 config_io: 
     banksel ANSEL
     clrf    ANSEL   ;pines digitales puerto A 
@@ -184,6 +237,24 @@ config_reloj:
     bcf     IRCF0
     bsf     SCS     ;OSCILADOR INTERNO
     return
+
+        
+config_tmr0:
+    banksel OPTION_REG
+    bcf     T0CS    ;reloj interno 
+    bcf     PSA     ;prescaler en tmr0
+    bsf     PS2     ;configurar el prescaler (111 = 1:256)
+    bsf     PS1
+    bsf     PS0
+    call reiniciar_tmr0
+    return
+
+reiniciar_tmr0:
+    banksel PORTA   ;bank0
+    movlw   217	    ;N para obtener 10ms de delay
+    movwf   TMR0    ;t_deseado = 4*(1/Fosc)*(256-N)*Prescaler
+    bcf     T0IF    ;apagar la bandera del tmr0
+    return
     
     
 config_int:
@@ -191,24 +262,13 @@ config_int:
     bsf	    GIE		;GIE=1 habilitar las interrupciones globales
     bsf	    RBIE    	;RBIE=1 habilitar interrupciones de cambio puertoB
     bcf	    RBIF	;apagar la bandera del IOC-PORTB
+    bsf	    T0IE	;T0IE=1 habilitar interrupciones Timer0
+    bcf	    T0IF	;apagar la bandera del tmr0
     banksel IOCB
     bsf	    IOCB, 0	;habilitar interrupt-on-change RB0
     bsf	    IOCB, 1	;habilitar interrupt-on-change RB1
     return
     
-    
-displayC: 
-    movf    PORTA, W	;contador a acumulador
-    call    tabla_7_seg	;obtner el valor correcto en el acumulador
-    movwf   PORTC	;mostrar el valor en el 7 segmentos
-    return
-
-    
-displayD:
-    movf    con7seg, W	;contador a acumulador
-    call    tabla_7_seg	;obtner el valor correcto en el acumulador
-    movwf   PORTD	;mostrar el valor en el 7 segmentos
-    return
     
     
 END
