@@ -13,9 +13,9 @@
 %PSECTS
 $build/default/production/main.o
 resVect CODE 0 0 0 3 2
-code CODE 0 0 0 164 2
-intVect CODE 0 0 0 2A 2
-udata_bank0 BANK0 1 20 20 7 1
+code CODE 0 0 0 17D 2
+intVect CODE 0 0 0 29 2
+udata_bank0 BANK0 1 20 20 D 1
 udata_shr COMMON 1 70 70 2 1
 config CONFIG 4 2007 2007 2 2
 # %UNUSED Section
@@ -24,22 +24,22 @@ config CONFIG 4 2007 2007 2 2
 #    <class name> <range> <delta>
 # Addresses given in the range are in hexadecimal and units of delta.
 %UNUSED
-RAM 27-6F 1
+RAM 2D-6F 1
 RAM A0-EF 1
 RAM 110-16F 1
 RAM 190-1EF 1
-BANK0 27-6F 1
+BANK0 2D-6F 1
 BANK1 A0-EF 1
 BANK2 110-16F 1
 BANK3 190-1EF 1
-CONST 164-1FFF 2
-ENTRY 164-1FFF 2
+CONST 17D-1FFF 2
+ENTRY 17D-1FFF 2
 IDLOC 2000-2003 2
-CODE 164-1FFF 2
+CODE 17D-1FFF 2
 COMMON 72-7F 1
 EEDATA 2100-21FF 2
-STRCODE 164-1FFF 2
-STRING 164-1FFF 2
+STRCODE 17D-1FFF 2
+STRING 17D-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -54,156 +54,179 @@ STRING 164-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $build/default/production/main.o
-0 intVect CODE >75:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-4 intVect CODE >77:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-4 intVect CODE >78:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-5 intVect CODE >79:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-6 intVect CODE >80:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-7 intVect CODE >82:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-7 intVect CODE >86:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-8 intVect CODE >87:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-9 intVect CODE >88:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-A intVect CODE >89:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-B intVect CODE >90:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-C intVect CODE >91:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-D intVect CODE >92:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-E intVect CODE >93:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-F intVect CODE >94:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-10 intVect CODE >95:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-11 intVect CODE >96:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-12 intVect CODE >101:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-13 intVect CODE >102:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-14 intVect CODE >103:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-15 intVect CODE >104:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-16 intVect CODE >105:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-17 intVect CODE >107:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-18 intVect CODE >108:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-19 intVect CODE >109:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-1A intVect CODE >110:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-1B intVect CODE >111:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-1C intVect CODE >112:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-1D intVect CODE >113:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-1E intVect CODE >114:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-1F intVect CODE >115:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-1F intVect CODE >116:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-20 intVect CODE >117:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-21 intVect CODE >118:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-22 intVect CODE >119:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-22 intVect CODE >120:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-23 intVect CODE >121:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-24 intVect CODE >123:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-25 intVect CODE >127:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-25 intVect CODE >128:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-26 intVect CODE >129:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-27 intVect CODE >130:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-28 intVect CODE >131:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-29 intVect CODE >132:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-0 resVect CODE >63:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-0 resVect CODE >65:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-0 resVect CODE >66:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-2 resVect CODE >67:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-0 code CODE >140:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-100 code CODE >141:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-100 code CODE >142:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-101 code CODE >143:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-102 code CODE >144:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-103 code CODE >145:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-104 code CODE >147:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-105 code CODE >148:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-106 code CODE >149:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-107 code CODE >150:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-108 code CODE >151:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-109 code CODE >152:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-10A code CODE >153:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-10B code CODE >154:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-10C code CODE >155:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-10D code CODE >156:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-10E code CODE >157:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-10F code CODE >158:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-110 code CODE >159:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-111 code CODE >160:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-112 code CODE >161:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-113 code CODE >162:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-114 code CODE >163:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-115 code CODE >168:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-115 code CODE >169:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-116 code CODE >170:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-117 code CODE >171:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-118 code CODE >172:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-119 code CODE >173:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-11B code CODE >179:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-11B code CODE >181:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-11C code CODE >182:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-11D code CODE >184:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-11E code CODE >191:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-11E code CODE >192:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-11F code CODE >193:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-120 code CODE >194:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-121 code CODE >195:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-122 code CODE >196:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-123 code CODE >197:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-124 code CODE >198:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-125 code CODE >200:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-125 code CODE >201:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-126 code CODE >202:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-127 code CODE >203:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-128 code CODE >204:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-129 code CODE >205:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-12A code CODE >206:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-12B code CODE >207:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-12C code CODE >209:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-12C code CODE >210:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-12E code CODE >211:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-12F code CODE >212:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-130 code CODE >214:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-132 code CODE >215:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-133 code CODE >216:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-134 code CODE >217:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-135 code CODE >218:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-136 code CODE >219:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-137 code CODE >220:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-138 code CODE >221:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-139 code CODE >222:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-13A code CODE >223:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-13B code CODE >225:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-13D code CODE >226:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-13E code CODE >227:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-13F code CODE >228:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-140 code CODE >229:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-141 code CODE >230:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-142 code CODE >233:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-142 code CODE >234:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-144 code CODE >235:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-145 code CODE >236:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-146 code CODE >237:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-147 code CODE >238:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-148 code CODE >239:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-149 code CODE >242:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-149 code CODE >243:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-14B code CODE >244:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-14C code CODE >245:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-14D code CODE >246:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-14E code CODE >247:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-14F code CODE >248:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-150 code CODE >249:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-151 code CODE >250:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-152 code CODE >252:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-152 code CODE >253:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-154 code CODE >254:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-155 code CODE >255:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-156 code CODE >256:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-157 code CODE >257:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-158 code CODE >260:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-158 code CODE >261:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-15A code CODE >262:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-15B code CODE >263:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-15C code CODE >264:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-15D code CODE >265:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-15E code CODE >266:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-15F code CODE >267:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-161 code CODE >268:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-162 code CODE >269:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
-163 code CODE >270:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+0 intVect CODE >90:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+4 intVect CODE >92:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+4 intVect CODE >93:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+5 intVect CODE >94:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+6 intVect CODE >95:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+7 intVect CODE >97:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+7 intVect CODE >101:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+8 intVect CODE >102:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+9 intVect CODE >103:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+A intVect CODE >104:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+B intVect CODE >105:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+C intVect CODE >106:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+D intVect CODE >107:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+E intVect CODE >108:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+F intVect CODE >109:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+10 intVect CODE >110:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+11 intVect CODE >111:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+12 intVect CODE >116:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+13 intVect CODE >118:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+14 intVect CODE >119:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+15 intVect CODE >120:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+16 intVect CODE >122:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+17 intVect CODE >123:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+18 intVect CODE >124:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+19 intVect CODE >125:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+1A intVect CODE >127:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+1B intVect CODE >128:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+1C intVect CODE >129:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+1D intVect CODE >130:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+1E intVect CODE >132:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+1F intVect CODE >133:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+20 intVect CODE >134:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+21 intVect CODE >136:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+22 intVect CODE >137:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+23 intVect CODE >138:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+24 intVect CODE >141:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+24 intVect CODE >142:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+25 intVect CODE >143:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+26 intVect CODE >144:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+27 intVect CODE >145:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+28 intVect CODE >146:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+0 resVect CODE >78:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+0 resVect CODE >80:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+0 resVect CODE >81:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+2 resVect CODE >82:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+0 code CODE >154:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+100 code CODE >155:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+100 code CODE >156:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+101 code CODE >157:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+102 code CODE >158:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+103 code CODE >159:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+104 code CODE >161:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+105 code CODE >162:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+106 code CODE >163:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+107 code CODE >164:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+108 code CODE >165:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+109 code CODE >166:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+10A code CODE >167:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+10B code CODE >168:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+10C code CODE >169:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+10D code CODE >170:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+10E code CODE >171:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+10F code CODE >172:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+110 code CODE >173:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+111 code CODE >174:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+112 code CODE >175:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+113 code CODE >176:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+114 code CODE >177:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+115 code CODE >182:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+115 code CODE >183:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+116 code CODE >184:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+117 code CODE >185:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+118 code CODE >186:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+119 code CODE >187:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+11B code CODE >193:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+11B code CODE >195:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+11C code CODE >196:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+11D code CODE >198:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+11E code CODE >205:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+11E code CODE >209:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+11F code CODE >210:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+120 code CODE >212:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+121 code CODE >213:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+122 code CODE >214:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+123 code CODE >215:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+125 code CODE >216:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+126 code CODE >217:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+127 code CODE >218:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+128 code CODE >220:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+129 code CODE >221:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+12A code CODE >222:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+12B code CODE >224:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+12C code CODE >232:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+12C code CODE >234:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+12D code CODE >235:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+12E code CODE >236:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+12F code CODE >237:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+130 code CODE >239:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+131 code CODE >240:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+132 code CODE >241:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+133 code CODE >242:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+134 code CODE >243:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+135 code CODE >244:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+136 code CODE >246:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+137 code CODE >250:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+137 code CODE >251:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+138 code CODE >252:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+139 code CODE >253:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+13A code CODE >254:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+13B code CODE >255:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+13C code CODE >256:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+13D code CODE >257:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+13E code CODE >259:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+13E code CODE >260:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+13F code CODE >261:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+140 code CODE >262:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+141 code CODE >263:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+142 code CODE >264:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+143 code CODE >265:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+144 code CODE >266:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+145 code CODE >268:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+145 code CODE >269:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+147 code CODE >270:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+148 code CODE >271:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+149 code CODE >273:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+14B code CODE >274:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+14C code CODE >275:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+14D code CODE >276:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+14E code CODE >277:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+14F code CODE >278:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+150 code CODE >279:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+151 code CODE >280:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+152 code CODE >281:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+153 code CODE >282:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+154 code CODE >284:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+156 code CODE >285:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+157 code CODE >286:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+158 code CODE >287:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+159 code CODE >288:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+15A code CODE >289:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+15B code CODE >292:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+15B code CODE >293:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+15D code CODE >294:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+15E code CODE >295:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+15F code CODE >296:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+160 code CODE >297:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+161 code CODE >298:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+162 code CODE >301:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+162 code CODE >302:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+164 code CODE >303:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+165 code CODE >304:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+166 code CODE >305:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+167 code CODE >306:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+168 code CODE >307:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+169 code CODE >308:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+16A code CODE >309:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+16B code CODE >311:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+16B code CODE >312:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+16D code CODE >313:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+16E code CODE >314:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+16F code CODE >315:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+170 code CODE >316:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+171 code CODE >319:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+171 code CODE >320:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+173 code CODE >321:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+174 code CODE >322:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+175 code CODE >323:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+176 code CODE >324:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+177 code CODE >325:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+178 code CODE >326:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+17A code CODE >327:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+17B code CODE >328:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
+17C code CODE >329:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_micros/lab5_micros.X/main.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -216,7 +239,7 @@ F intVect CODE >94:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab5_mic
 # was defined in a psect then <psect> will be "-". File-name
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
-__Hspace_0 164 0 ABS 0 - -
+__Hspace_0 17D 0 ABS 0 - -
 __Hspace_1 72 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Hspace_4 4010 0 ABS 0 - -
@@ -275,7 +298,7 @@ __HintVect 0 0 ABS 0 intVect -
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-udata_bank0 1 20 20 7 1
+udata_bank0 1 20 20 D 1
 udata_shr 1 70 70 2 1
 # %NOTES Section
 # This section contains data of all the note-psects.  The beginning of the section

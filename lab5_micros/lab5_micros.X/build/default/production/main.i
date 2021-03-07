@@ -2487,6 +2487,16 @@ CONFIG BOR4V=BOR40V
 
 
 ;-------------------------------------------------------------------------------
+; Macros
+;-------------------------------------------------------------------------------
+
+comparar macro var1, var2
+    movf var1, W
+    sublw var2
+    endm
+
+
+;-------------------------------------------------------------------------------
 ; Variables
 ;-------------------------------------------------------------------------------
 PSECT udata_shr
@@ -2499,9 +2509,14 @@ nibble1: DS 1
 display0: DS 1
 display1: DS 1
 con7seg: DS 1
-banderas: DS 1
+bandera: DS 1
 cont: DS 1
-
+hex0: DS 1
+hex1: DS 1
+decimal: DS 1
+divisor: DS 1
+dividendo: DS 1
+cen: DS 1
 
 ;-------------------------------------------------------------------------------
 ; Vector Reset
@@ -2547,29 +2562,28 @@ isr:
     ; Interrupcion Timer0
     ;---------------------------------------------------------------------------
     btfss ((INTCON) and 07Fh), 2 ;revisar la bandera del tmr0
+    ;REINICIAR TIMER0
     goto pop
-    movlw 217 ;N para obtener 50ms de delay
+    movlw 217 ;N para obtener 10ms de delay
     movwf TMR0 ;t_deseado = 4*(1/Fosc)*(256-N)*Prescaler
-    incf PORTD
-
-    bcf PORTB, 6
-    bcf PORTB, 7
-    btfsc banderas, 0
-    goto dis1
-    movf display0, W
-    movwf PORTC
-    bsf PORTB, 6
-    goto siguiente
-dis1:
-    movf display1, W
-    movwf PORTC
-    bsf PORTB, 7
-siguiente:
-    movlw 1
-    xorwf banderas, F
-
+    ;DISPLAYS PUERTO C
+    bcf PORTB, 6 ;apagar transistor del displayC0
+    bcf PORTB, 7 ;apagar transistor del displayC1
+    btfsc bandera, 0 ;bandera para cambiar de display
+    goto $+5 ;si es 1 se irá al display1
+    ;DISPLAY0
+    movf display0, W ;display0 al acumulador
+    movwf PORTC ;mostrar display0
+    bsf PORTB, 6 ;encender el transistor
+    goto $+4
+    ;DISPLAY1
+    movf display1, W ;display1 al acumulador
+    movwf PORTC ;mostrar display1
+    bsf PORTB, 7 ;encender el transistor
+    ;SIGUIENTE DISPLAY
+    movlw 1 ;1 al acumulador
+    xorwf bandera, F ;negara el valor de bandera
     bcf ((INTCON) and 07Fh), 2 ;apagar la bandera del tmr0
-
 
 
 pop:
@@ -2617,7 +2631,7 @@ main:
     call config_io ;configuracion entradas y salidas
     call config_int ;configuracion interrupciones
     call config_reloj ;configuracion del oscilador interno
-    call config_tmr0
+    call config_tmr0 ;configuracion del timer0
     banksel PORTA
 
 
@@ -2636,21 +2650,66 @@ loop:
 ; Subrutinas
 ;-------------------------------------------------------------------------------
 
+hex_a_dec:
+     ;sumar 16 veces el mismo numero
+
+    ;todo lo en una solo variale que se ba a dvivir despues
+    movf nibble0, W
+    movwf hex0
+
+    movf nibble1, W
+    addwf hex1, F
+    incf cont
+    comparar cont, 10
+    btfss STATUS, 2 ;-((STATUS) and 07Fh), 2 - si Z=0 no es igual, si Z=1 es igual
+    goto $-5
+    clrf cont
+
+    movf hex0, W
+    addwf hex1, W
+    movwf decimal
+
+    return
+
+    ; restar 100 y contar cuantas veces se resto
+
+    ; restar 10 y contar cuantas veces se resto
+
+    ;restar de 1 en 1 y contar cuantas veces se resto
+
+dividir_cen:
+
+    movlw 100
+    movwf divisor
+    movf decimal, W
+    movwf dividendo
+
+    movf divisor, W
+    subwf dividendo, F
+    btfss STATUS, 0
+    goto $+3
+    incf cen
+    goto $-5
+
+    return
+
+
+
 separar_nibbles:
-    movf PORTA, W
-    andlw 0x0F
+    movf PORTA, W ;Contador a acumulador
+    andlw 0x0F ;Dejar solo los 4 bits menos significativos
     movwf nibble0
-    swapf PORTA, W
-    andlw 0x0F
+    swapf PORTA, W ;Invertir los valores del contador
+    andlw 0x0F ;Dejar solo los 4 bits menos significativos
     movwf nibble1
     return
 
 preparar_displays:
-    movf nibble0, W
-    call tabla_7_seg
+    movf nibble0, W ;variable0 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
     movwf display0
-    movf nibble1, W
-    call tabla_7_seg
+    movf nibble1, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
     movwf display1
     return
 
@@ -2699,7 +2758,7 @@ config_tmr0:
 
 reiniciar_tmr0:
     banksel PORTA ;bank0
-    movlw 217 ;N para obtener 20ms de delay
+    movlw 217 ;N para obtener 10ms de delay
     movwf TMR0 ;t_deseado = 4*(1/Fosc)*(256-N)*Prescaler
     bcf ((INTCON) and 07Fh), 2 ;apagar la bandera del tmr0
     return
