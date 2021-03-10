@@ -2498,6 +2498,14 @@ nibble0: DS 1
 nibble1: DS 1
 display0: DS 1
 display1: DS 1
+display2: DS 1
+display3: DS 1
+display4: DS 1
+display5: DS 1
+display6: DS 1
+display7: DS 1
+
+
 con7seg: DS 1
 bandera: DS 1
 cont: DS 1
@@ -2508,8 +2516,9 @@ divisor: DS 1
 dividendo: DS 1
 cen: DS 1
 
-supervar: DS 1
+modo: DS 1
 prueba: DS 1
+tiempo: DS 1
 
 ;-------------------------------------------------------------------------------
 ; Vector Reset
@@ -2542,7 +2551,8 @@ isr:
     btfss ((INTCON) and 07Fh), 0 ;revisar la bandera del IOC-PORTB
     goto salir
     btfss PORTB, 3 ;si el boton se preciona se va a incrementar
-    incf supervar ;si no se preciona el boton se salta una linea
+    incf modo
+    ;si no se preciona el boton se salta una linea
     btfss PORTB, 3
     goto $-1
     btfss PORTB, 4 ;si el boton se preciona se va a incrementar
@@ -2564,23 +2574,9 @@ isr:
     goto pop
     movlw 217 ;N para obtener 10ms de delay
     movwf TMR0 ;t_deseado = 4*(1/Fosc)*(256-N)*Prescaler
-    ;DISPLAYS PUERTO C
-    bcf PORTA, 0 ;apagar transistor del displayC0
-    bcf PORTA, 1 ;apagar transistor del displayC1
-    btfsc bandera, 0 ;bandera para cambiar de display
-    goto $+5 ;si es 1 se irá al display1
-    ;DISPLAY0
-    movf display0, W ;display0 al acumulador
-    movwf PORTC ;mostrar display0
-    bsf PORTA, 0 ;encender el transistor
-    goto $+4
-    ;DISPLAY1
-    movf display1, W ;display1 al acumulador
-    movwf PORTC ;mostrar display1
-    bsf PORTA, 1 ;encender el transistor
-    ;SIGUIENTE DISPLAY
-    movlw 1 ;1 al acumulador
-    xorwf bandera, F ;negara el valor de bandera
+
+    bsf tiempo, 0
+
     bcf ((INTCON) and 07Fh), 2 ;apagar la bandera del tmr0
 
 
@@ -2630,6 +2626,10 @@ main:
     call config_int ;configuracion interrupciones
     call config_reloj ;configuracion del oscilador interno
     call config_tmr0 ;configuracion del timer0
+
+    movlw 1
+    movwf bandera
+
     banksel PORTA
 
 
@@ -2638,9 +2638,14 @@ main:
 ;-------------------------------------------------------------------------------
 loop:
 
+    btfsc tiempo, 0
+    call displays
+
     call separar_nibbles
     call preparar_displays
     call mostrar_modo
+
+
 
     goto loop
 
@@ -2649,8 +2654,94 @@ loop:
 ; Subrutinas
 ;-------------------------------------------------------------------------------
 
+displays:
+    ;DISPLAYS PUERTO C
+    clrf PORTA ;apagar transistor del displayC
+
+dis0:
+    btfss bandera, 0 ;bandera para cambiar de display
+    goto dis1 ;si es 1 se irá al display1
+    movf display0, W ;display0 al acumulador
+    movwf PORTC ;mostrar display0
+    bsf PORTA, 0 ;encender el transistor
+    goto siguiente
+
+dis1:
+    btfss bandera, 1 ;bandera para cambiar de display
+    goto dis2 ;si es 1 se irá al display1
+    movf display1, W ;display1 al acumulador
+    movwf PORTC ;mostrar display1
+    bsf PORTA, 1 ;encender el transistor
+    goto siguiente
+
+dis2:
+    btfss bandera, 2 ;bandera para cambiar de display
+    goto dis3 ;si es 1 se irá al display1
+    movf display2, W ;display1 al acumulador
+    movwf PORTC ;mostrar display1
+    bsf PORTA, 2 ;encender el transistor
+    goto siguiente
+
+dis3:
+    btfss bandera, 3 ;bandera para cambiar de display
+    goto dis4 ;si es 1 se irá al display1
+    movf display3, W ;display1 al acumulador
+    movwf PORTC ;mostrar display1
+    bsf PORTA, 3 ;encender el transistor
+    goto siguiente
+
+dis4:
+    btfss bandera, 4 ;bandera para cambiar de display
+    goto dis5 ;si es 1 se irá al display1
+    movf display4, W ;display0 al acumulador
+    movwf PORTC ;mostrar display0
+    bsf PORTA, 4 ;encender el transistor
+    goto siguiente
+
+dis5:
+    btfss bandera, 5 ;bandera para cambiar de display
+    goto dis6 ;si es 1 se irá al display1
+    movf display5, W ;display1 al acumulador
+    movwf PORTC ;mostrar display1
+    bsf PORTA, 5 ;encender el transistor
+    goto siguiente
+
+dis6:
+    btfss bandera, 6 ;bandera para cambiar de display
+    goto dis7 ;si es 1 se irá al display1
+    movf display6, W ;display1 al acumulador
+    movwf PORTC ;mostrar display1
+    bsf PORTA, 6 ;encender el transistor
+    goto siguiente
+
+dis7:
+    btfss bandera, 7 ;bandera para cambiar de display
+    goto siguiente ;si es 1 se irá al display1
+    movf display7, W ;display1 al acumulador
+    movwf PORTC ;mostrar display1
+    bsf PORTA, 7 ;encender el transistor
+
+siguiente:
+    rlf bandera, F ;negara el valor de bandera
+
+    btfsc ((STATUS) and 07Fh), 0
+    goto reiniciar
+    goto exit
+
+reiniciar:
+    movlw 1
+    movwf bandera
+
+exit:
+    bcf tiempo, 0
+
+
+    return
+
+
+
 mostrar_modo:
-    movf supervar, W
+    movf modo, W
     movwf PORTE
     return
 
@@ -2667,10 +2758,40 @@ preparar_displays:
     movf nibble0, W ;variable0 a acumulador
     call tabla_7_seg ;obtner el valor correcto en el acumulador
     movwf display0
+
     movf nibble1, W ;variable1 a acumulador
     call tabla_7_seg ;obtner el valor correcto en el acumulador
     movwf display1
+
+    movf prueba, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display2
+
+    movf modo, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display3
+
+    movf modo, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display4
+
+    movf prueba, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display5
+
+    movf prueba, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display6
+
+    movf modo, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display7
+
     return
+
+;-------------------------------------------------------------------------------
+; Subrutinas de configuración
+;-------------------------------------------------------------------------------
 
 config_io:
     banksel ANSEL
