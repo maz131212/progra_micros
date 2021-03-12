@@ -16,7 +16,7 @@
 ; Display 7 Segmentos en PORTD
 ;
 ; Creado: 28 feb, 2021
-; Última modificación: 28 feb, 2021
+; Última modificación: 06 mar, 2021
 ;-------------------------------------------------------------------------------
 
 
@@ -2504,19 +2504,21 @@ W_TEMP: DS 1
 STATUS_TEMP: DS 1
 
 PSECT udata_bank0
-nibble0: DS 1
-nibble1: DS 1
 display0: DS 1
 display1: DS 1
+display2: DS 1
+display3: DS 1
+display4: DS 1
 con7seg: DS 1
 bandera: DS 1
 cont: DS 1
 hex0: DS 1
 hex1: DS 1
-decimal: DS 1
-divisor: DS 1
-dividendo: DS 1
-cen: DS 1
+centena: DS 1
+decena: DS 1
+unidad: DS 1
+numero: DS 1
+tiempo: DS 1
 
 ;-------------------------------------------------------------------------------
 ; Vector Reset
@@ -2566,23 +2568,8 @@ isr:
     goto pop
     movlw 217 ;N para obtener 10ms de delay
     movwf TMR0 ;t_deseado = 4*(1/Fosc)*(256-N)*Prescaler
-    ;DISPLAYS PUERTO C
-    bcf PORTB, 6 ;apagar transistor del displayC0
-    bcf PORTB, 7 ;apagar transistor del displayC1
-    btfsc bandera, 0 ;bandera para cambiar de display
-    goto $+5 ;si es 1 se irá al display1
-    ;DISPLAY0
-    movf display0, W ;display0 al acumulador
-    movwf PORTC ;mostrar display0
-    bsf PORTB, 6 ;encender el transistor
-    goto $+4
-    ;DISPLAY1
-    movf display1, W ;display1 al acumulador
-    movwf PORTC ;mostrar display1
-    bsf PORTB, 7 ;encender el transistor
-    ;SIGUIENTE DISPLAY
-    movlw 1 ;1 al acumulador
-    xorwf bandera, F ;negara el valor de bandera
+# 142 "main.s"
+    bsf tiempo, 0
     bcf ((INTCON) and 07Fh), 2 ;apagar la bandera del tmr0
 
 
@@ -2632,6 +2619,7 @@ main:
     call config_int ;configuracion interrupciones
     call config_reloj ;configuracion del oscilador interno
     call config_tmr0 ;configuracion del timer0
+    call config_inicial
     banksel PORTA
 
 
@@ -2640,8 +2628,16 @@ main:
 ;-------------------------------------------------------------------------------
 loop:
 
-    call separar_nibbles
+    call numero_hex
+
+    movf PORTA, W
+    movwf numero
+    call numero_decimal
+
     call preparar_displays
+
+    btfsc tiempo, 0
+    call displays
 
     goto loop
 
@@ -2650,68 +2646,136 @@ loop:
 ; Subrutinas
 ;-------------------------------------------------------------------------------
 
-hex_a_dec:
-     ;sumar 16 veces el mismo numero
 
-    ;todo lo en una solo variale que se ba a dvivir despues
-    movf nibble0, W
-    movwf hex0
 
-    movf nibble1, W
-    addwf hex1, F
-    incf cont
-    comparar cont, 10
-    btfss STATUS, 2 ;-((STATUS) and 07Fh), 2 - si Z=0 no es igual, si Z=1 es igual
-    goto $-5
-    clrf cont
+displays:
+    bcf PORTB, 6 ;apagar transistor del displayC0
+    bcf PORTB, 7 ;apagar transistor del displayC1
+    bcf PORTE, 0
+    bcf PORTE, 1
+    bcf PORTE, 2
 
-    movf hex0, W
-    addwf hex1, W
-    movwf decimal
+dis0:
+    btfss bandera, 0 ;bandera para cambiar de display
+    goto dis1 ;si es 1 se irá al display1
+    movf display0, W ;display0 al acumulador
+    movwf PORTC ;mostrar display0
+    bsf PORTB, 6 ;encender el transistor
+    goto siguiente
+
+dis1:
+    btfss bandera, 1 ;bandera para cambiar de display
+    goto dis2 ;si es 1 se irá al display1
+    movf display1, W ;display1 al acumulador
+    movwf PORTC ;mostrar display1
+    bsf PORTB, 7 ;encender el transistor
+    goto siguiente
+
+dis2:
+    btfss bandera, 2 ;bandera para cambiar de display
+    goto dis3 ;si es 1 se irá al display1
+    movf display2, W ;display1 al acumulador
+    movwf PORTD ;mostrar display1
+    bsf PORTE, 0 ;encender el transistor
+    goto siguiente
+
+dis3:
+    btfss bandera, 3 ;bandera para cambiar de display
+    goto dis4 ;si es 1 se irá al display1
+    movf display3, W ;display1 al acumulador
+    movwf PORTD ;mostrar display1
+    bsf PORTE, 1 ;encender el transistor
+    goto siguiente
+
+dis4:
+    btfss bandera, 4 ;bandera para cambiar de display
+    goto siguiente ;si es 1 se irá al display1
+    movf display4, W ;display1 al acumulador
+    movwf PORTD ;mostrar display1
+    bsf PORTE, 2 ;encender el transistor
+
+siguiente:
+    rlf bandera, F ;negara el valor de bandera
+
+    btfsc ((STATUS) and 07Fh), 0
+    goto reiniciar
+    goto exit
+
+reiniciar:
+    movlw 1
+    movwf bandera
+
+exit:
+    bcf tiempo, 0
 
     return
 
-    ; restar 100 y contar cuantas veces se resto
 
-    ; restar 10 y contar cuantas veces se resto
+numero_decimal:
 
-    ;restar de 1 en 1 y contar cuantas veces se resto
+    clrf centena
+    clrf decena
+    clrf unidad
 
-dividir_cen:
-
+centenas: ; restar 100 y contar cuantas veces se resto
     movlw 100
-    movwf divisor
-    movf decimal, W
-    movwf dividendo
-
-    movf divisor, W
-    subwf dividendo, F
+    subwf numero, W
     btfss STATUS, 0
-    goto $+3
-    incf cen
-    goto $-5
+    goto decenas
+    movwf numero
+    incf centena
+    goto centenas
+
+decenas: ; restar 10 y contar cuantas veces se resto
+    movlw 10
+    subwf numero, W
+    btfss STATUS, 0
+    goto unidades
+    movwf numero
+    incf decena
+    goto decenas
+
+unidades: ; lo que queda son las unidades
+    movf numero, W
+    movwf unidad
 
     return
 
 
-
-separar_nibbles:
+numero_hex:
     movf PORTA, W ;Contador a acumulador
     andlw 0x0F ;Dejar solo los 4 bits menos significativos
-    movwf nibble0
+    movwf hex0
     swapf PORTA, W ;Invertir los valores del contador
     andlw 0x0F ;Dejar solo los 4 bits menos significativos
-    movwf nibble1
+    movwf hex1
     return
 
 preparar_displays:
-    movf nibble0, W ;variable0 a acumulador
+    movf hex0, W ;variable0 a acumulador
     call tabla_7_seg ;obtner el valor correcto en el acumulador
     movwf display0
-    movf nibble1, W ;variable1 a acumulador
+
+    movf hex1, W ;variable1 a acumulador
     call tabla_7_seg ;obtner el valor correcto en el acumulador
     movwf display1
+
+    movf unidad, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display2
+
+    movf decena, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display3
+
+    movf centena, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display4
     return
+
+;-------------------------------------------------------------------------------
+; Subrutinas de configuración
+;-------------------------------------------------------------------------------
 
 config_io:
     banksel ANSEL
@@ -2728,12 +2792,14 @@ config_io:
     bsf WPUB, 1 ;habilitar pull-up ((PORTB) and 07Fh), 1
     clrf TRISC ;puerto C como salida
     clrf TRISD ;puerto D como salida
+    clrf TRISE ;puerto E como salida
 
     banksel PORTA
     clrf PORTA ;puerto A en 0
     clrf PORTB ;puerto B en 0
     clrf PORTC ;puerto C en 0
     clrf PORTD ;puerto D en 0
+    clrf PORTE ;puerto D en 0
     return
 
 
@@ -2776,6 +2842,13 @@ config_int:
     bsf IOCB, 1 ;habilitar interrupt-on-change ((PORTB) and 07Fh), 1
     return
 
+config_inicial:
+    banksel PORTA
+
+    movlw 1
+    movwf bandera
+
+    return
 
 
 END
