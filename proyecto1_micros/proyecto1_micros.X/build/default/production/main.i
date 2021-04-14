@@ -12,7 +12,7 @@
 ; Hardware:
 ;
 ; Creado: 09 mar, 2021
-; Última modificación: 09 mar, 2021
+; Última modificación:
 ;-------------------------------------------------------------------------------
 
 
@@ -2494,8 +2494,15 @@ W_TEMP: DS 1
 STATUS_TEMP: DS 1
 
 PSECT udata_bank0
-nibble0: DS 1
-nibble1: DS 1
+uni0: DS 1
+uni1: DS 1
+uni2: DS 1
+uni3: DS 1
+dec0: DS 1
+dec1: DS 1
+dec2: DS 1
+dec3: DS 1
+
 display0: DS 1
 display1: DS 1
 display2: DS 1
@@ -2505,20 +2512,30 @@ display5: DS 1
 display6: DS 1
 display7: DS 1
 
-
-con7seg: DS 1
-bandera: DS 1
-cont: DS 1
-hex0: DS 1
-hex1: DS 1
-decimal: DS 1
-divisor: DS 1
-dividendo: DS 1
-cen: DS 1
+decena: DS 1
+unidad: DS 1
 
 modo: DS 1
 prueba: DS 1
+numero: DS 1
+bandera: DS 1
 tiempo: DS 1
+tiempo1: DS 1
+tiempo2: DS 1
+
+
+via1: DS 1
+via2: DS 1
+via3: DS 1
+
+tv1: DS 1
+tv2: DS 1
+tv3: DS 1
+ttv: DS 1
+ta: DS 1
+tr1: DS 1
+tr2: DS 1
+tr3: DS 1
 
 ;-------------------------------------------------------------------------------
 ; Vector Reset
@@ -2549,10 +2566,9 @@ isr:
     ; IOC puerto B
     ;---------------------------------------------------------------------------
     btfss ((INTCON) and 07Fh), 0 ;revisar la bandera del IOC-PORTB
-    goto salir
+    goto salirB
     btfss PORTB, 3 ;si el boton se preciona se va a incrementar
-    incf modo
-    ;si no se preciona el boton se salta una linea
+    incf modo ;si no se preciona el boton se salta una linea
     btfss PORTB, 3
     goto $-1
     btfss PORTB, 4 ;si el boton se preciona se va a incrementar
@@ -2563,7 +2579,7 @@ isr:
     decf prueba ;si no se preciona el boton se salta una linea
     btfss PORTB, 5
     goto $-1
-    salir:
+    salirB:
     bcf ((INTCON) and 07Fh), 0 ;apagar la bandera del IOC-PORTB
 
     ;---------------------------------------------------------------------------
@@ -2571,7 +2587,7 @@ isr:
     ;---------------------------------------------------------------------------
     btfss ((INTCON) and 07Fh), 2 ;revisar la bandera del tmr0
     ;REINICIAR TIMER0
-    goto pop
+    goto itimer1
     movlw 217 ;N para obtener 10ms de delay
     movwf TMR0 ;t_deseado = 4*(1/Fosc)*(256-N)*Prescaler
 
@@ -2579,6 +2595,36 @@ isr:
 
     bcf ((INTCON) and 07Fh), 2 ;apagar la bandera del tmr0
 
+    ;---------------------------------------------------------------------------
+    ; Interrupcion Timer1
+    ;---------------------------------------------------------------------------
+    itimer1:
+    btfss ((PIR1) and 07Fh), 0
+    goto itimer2
+    movlw 0x0B
+    movwf TMR1L
+    movlw 0x47
+    movwf TMR1H
+
+    incf tiempo1
+    btfss tiempo1, 2
+    goto $+3
+
+    incf prueba
+    clrf tiempo1
+
+    bcf ((PIR1) and 07Fh), 0
+
+    ;---------------------------------------------------------------------------
+    ; Interrupcion Timer2
+    ;---------------------------------------------------------------------------
+    itimer2:
+    btfss ((PIR1) and 07Fh), 1
+    goto pop
+
+    incf tiempo2
+
+    bcf ((PIR1) and 07Fh), 1
 
 pop:
     swapf STATUS_TEMP, W ;inveritr los valores de STATUS
@@ -2626,9 +2672,10 @@ main:
     call config_int ;configuracion interrupciones
     call config_reloj ;configuracion del oscilador interno
     call config_tmr0 ;configuracion del timer0
+    call config_tmr1 ;configuracion del timer1
+    call config_tmr2 ;configuracion del timer2
+    call config_inicial
 
-    movlw 1
-    movwf bandera
 
     banksel PORTA
 
@@ -2638,12 +2685,26 @@ main:
 ;-------------------------------------------------------------------------------
 loop:
 
+
+
+    call mostrar_modo
+
+
+    movf prueba, W
+    movwf numero
+    call numero_decimal
+
+    movf decena, W
+    movwf dec0
+
+    movf unidad, W
+    movwf uni0
+
+
+    call preparar_displays
+
     btfsc tiempo, 0
     call displays
-
-    call separar_nibbles
-    call preparar_displays
-    call mostrar_modo
 
 
 
@@ -2653,6 +2714,63 @@ loop:
 ;-------------------------------------------------------------------------------
 ; Subrutinas
 ;-------------------------------------------------------------------------------
+
+
+numero_decimal:
+    clrf decena
+    clrf unidad
+
+decenas: ; restar 10 y contar cuantas veces se resto
+    movlw 10
+    subwf numero, W
+    btfss STATUS, 0
+    goto unidades
+    movwf numero
+    incf decena
+    goto decenas
+
+unidades: ; lo que queda son las unidades
+    movf numero, W
+    movwf unidad
+
+    return
+
+
+preparar_displays:
+    movf uni0, W ;variable0 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display0
+
+    movf dec0, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display1
+
+    movf uni1, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display2
+
+    movf dec1, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display3
+
+    movf uni2, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display4
+
+    movf dec2, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display5
+
+    movf uni3, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display6
+
+    movf dec3, W ;variable1 a acumulador
+    call tabla_7_seg ;obtner el valor correcto en el acumulador
+    movwf display7
+
+    return
+
 
 displays:
     ;DISPLAYS PUERTO C
@@ -2735,58 +2853,77 @@ reiniciar:
 exit:
     bcf tiempo, 0
 
-
     return
 
 
 
 mostrar_modo:
-    movf modo, W
-    movwf PORTE
-    return
 
-separar_nibbles:
-    movf prueba, W ;Contador a acumulador
-    andlw 0x0F ;Dejar solo los 4 bits menos significativos
-    movwf nibble0
-    swapf prueba, W ;Invertir los valores del contador
-    andlw 0x0F ;Dejar solo los 4 bits menos significativos
-    movwf nibble1
-    return
+m1:
+    movlw 1 ;pueto B a el acumulador
+    subwf modo, W ;restar acumulador y 7seg, respuesta en el acumulador
+    btfss STATUS, 2 ;--Z-- si Z=0 no es igual, si Z=1 es igual
+    goto m2
+    bsf PORTE, 0
+    bcf PORTE, 1
+    bcf PORTE, 2
+    bcf PORTD, 3
+    bcf PORTD, 4
+    goto salirmodo
+m2:
+    movlw 2 ;pueto B a el acumulador
+    subwf modo, W ;restar acumulador y 7seg, respuesta en el acumulador
+    btfss STATUS, 2 ;--Z-- si Z=0 no es igual, si Z=1 es igual
+    goto m3
+    bsf PORTE, 1
+    bcf PORTE, 0
+    bcf PORTE, 2
+    bcf PORTD, 3
+    bcf PORTD, 4
+    goto salirmodo
+m3:
+    movlw 3 ;pueto B a el acumulador
+    subwf modo, W ;restar acumulador y 7seg, respuesta en el acumulador
+    btfss STATUS, 2 ;--Z-- si Z=0 no es igual, si Z=1 es igual
+    goto m4
+    bsf PORTE, 2
+    bcf PORTE, 0
+    bcf PORTE, 1
+    bcf PORTD, 3
+    bcf PORTD, 4
+    goto salirmodo
+m4:
+    movlw 4 ;pueto B a el acumulador
+    subwf modo, W ;restar acumulador y 7seg, respuesta en el acumulador
+    btfss STATUS, 2 ;--Z-- si Z=0 no es igual, si Z=1 es igual
+    goto m5
+    bsf PORTD, 3
+    bcf PORTE, 0
+    bcf PORTE, 1
+    bcf PORTE, 2
+    bcf PORTD, 4
+    goto salirmodo
+m5:
+    movlw 5 ;pueto B a el acumulador
+    subwf modo, W ;restar acumulador y 7seg, respuesta en el acumulador
+    btfss STATUS, 2 ;--Z-- si Z=0 no es igual, si Z=1 es igual
+    goto m6
+    bsf PORTD, 4
+    bcf PORTE, 0
+    bcf PORTE, 1
+    bcf PORTE, 2
+    bcf PORTD, 3
+    goto salirmodo
+m6:
+    movlw 6 ;pueto B a el acumulador
+    subwf modo, W ;restar acumulador y 7seg, respuesta en el acumulador
+    btfss STATUS, 2 ;--Z-- si Z=0 no es igual, si Z=1 es igual
+    goto salirmodo
+    movlw 1
+    movwf modo
+    goto m1
 
-preparar_displays:
-    movf nibble0, W ;variable0 a acumulador
-    call tabla_7_seg ;obtner el valor correcto en el acumulador
-    movwf display0
-
-    movf nibble1, W ;variable1 a acumulador
-    call tabla_7_seg ;obtner el valor correcto en el acumulador
-    movwf display1
-
-    movf prueba, W ;variable1 a acumulador
-    call tabla_7_seg ;obtner el valor correcto en el acumulador
-    movwf display2
-
-    movf modo, W ;variable1 a acumulador
-    call tabla_7_seg ;obtner el valor correcto en el acumulador
-    movwf display3
-
-    movf modo, W ;variable1 a acumulador
-    call tabla_7_seg ;obtner el valor correcto en el acumulador
-    movwf display4
-
-    movf prueba, W ;variable1 a acumulador
-    call tabla_7_seg ;obtner el valor correcto en el acumulador
-    movwf display5
-
-    movf prueba, W ;variable1 a acumulador
-    call tabla_7_seg ;obtner el valor correcto en el acumulador
-    movwf display6
-
-    movf modo, W ;variable1 a acumulador
-    call tabla_7_seg ;obtner el valor correcto en el acumulador
-    movwf display7
-
+salirmodo:
     return
 
 ;-------------------------------------------------------------------------------
@@ -2850,6 +2987,53 @@ reiniciar_tmr0:
     return
 
 
+config_tmr1:
+    banksel T1CON
+
+    bsf ((T1CON) and 07Fh), 0 ;habilitar Timer1
+    bcf ((T1CON) and 07Fh), 6 ;Timer1 siempre contando
+    bcf ((T1CON) and 07Fh), 3 ;oscilador apagado
+    bcf ((T1CON) and 07Fh), 1 ;reloj interno
+
+    bsf ((T1CON) and 07Fh), 5 ;configurar el prescaler (11 = 1:8)
+    bsf ((T1CON) and 07Fh), 4
+
+    call reiniciar_tmr1
+    return
+
+reiniciar_tmr1:
+    banksel PIR1 ;bank0 - en este banco tambien está TMR1L y TMR1H
+    ; tiempo = (65536 - N) * prescaler * (1/Fosc/4)
+    ; N = 2,887 = 0x0B47 para un delay de 1/2 segundo
+    movlw 0x0B
+    movwf TMR1L
+    movlw 0x47
+    movwf TMR1H
+    bcf ((PIR1) and 07Fh), 0
+    return
+
+config_tmr2:
+    banksel T2CON
+
+    bsf ((T2CON) and 07Fh), 2 ;habilitar Timer2
+
+    bsf ((T2CON) and 07Fh), 1 ;configurar el prescaler (11 = 1:16)
+    bsf ((T2CON) and 07Fh), 0
+
+    bsf ((T2CON) and 07Fh), 6 ;configurar el postscaler (1111 = 1:16)
+    bsf ((T2CON) and 07Fh), 5
+    bsf ((T2CON) and 07Fh), 4
+    bsf ((T2CON) and 07Fh), 3
+
+    ;para un tiempo de 0.0625 segundos
+    banksel PR2
+    movlw 244
+    movwf PR2
+
+    bcf ((PIR1) and 07Fh), 1
+    return
+
+
 config_int:
     banksel INTCON
     bsf ((INTCON) and 07Fh), 7 ;((INTCON) and 07Fh), 7=1 habilitar las interrupciones globales
@@ -2857,12 +3041,38 @@ config_int:
     bcf ((INTCON) and 07Fh), 0 ;apagar la bandera del IOC-PORTB
     bsf ((INTCON) and 07Fh), 5 ;((INTCON) and 07Fh), 5=1 habilitar interrupciones Timer0
     bcf ((INTCON) and 07Fh), 2 ;apagar la bandera del tmr0
+    bsf ((INTCON) and 07Fh), 6 ;habilitar las interrupciones perifericas
+
     banksel IOCB
     bsf IOCB, 3 ;habilitar interrupt-on-change ((PORTB) and 07Fh), 3
     bsf IOCB, 4 ;habilitar interrupt-on-change ((PORTB) and 07Fh), 4
     bsf IOCB, 5 ;habilitar interrupt-on-change ((PORTB) and 07Fh), 5
+
+    banksel PIE1
+    bsf ((PIE1) and 07Fh), 1 ;habilitar interrupciones Timer2
+    bsf ((PIE1) and 07Fh), 0 ;habilitar interrupciones Timer1
+    ;banksel PIR1
+    ;bcf ((PIR1) and 07Fh), 1
+    ;bcf ((PIR1) and 07Fh), 0
+
     return
 
+config_inicial:
+    banksel PORTA
+
+    movlw 1
+    movwf bandera
+
+    movlw 3
+    movwf ttv
+
+    movlw 3
+    movwf ta
+
+    movlw 1
+    movwf modo
+
+    return
 
 
 END
