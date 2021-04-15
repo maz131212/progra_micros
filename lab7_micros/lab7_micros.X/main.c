@@ -45,12 +45,20 @@ uint8_t numero;
 uint8_t centenas;
 uint8_t decenas;
 uint8_t unidades;
+int segU;
+int segD;
+int segC;
+uint8_t banderaT0;
+
+
 
 //******************************************************************************
 // Prototipos de funciones
 //******************************************************************************
 void setup(void);       //Funcion para definir la configuracion inicial
 void decimales(void);
+int Config_7(int numero7);
+void display(void);
 
 //******************************************************************************
 // Vector de interrupción
@@ -65,9 +73,9 @@ void __interrupt() ISR(void){
     
     if (INTCONbits.T0IF)
     {
-        T0IF = 0;
+        banderaT0++;
+        INTCONbits.T0IF = 0;
         TMR0 = v_tmr0;
-        PORTD++;
     }
     
 }
@@ -110,6 +118,12 @@ void main(void)
     
     decimales();
     
+    segU = Config_7(unidades);
+    segD = Config_7(decenas);
+    segC = Config_7(centenas);
+    
+    display();
+    
     
     
     
@@ -122,7 +136,7 @@ void main(void)
 
 void setup(void) {
     
-    v_tmr0 = 236; // para 5 ms
+    v_tmr0 = 61; // para 5 ms 236
     
     // ENTRADAS Y SALIDAS
     TRISE = 0;  // todos las salidas del puerto E estan en OUTPUT
@@ -182,4 +196,87 @@ void decimales(void)
     
     unidades = numero - (decenas*10);
 
+}
+
+
+int Config_7(int numero7)
+{
+    int valor, seg;
+    seg = numero7;
+    
+    switch(seg)
+    {
+        case 0:
+            valor= 0b00111111;
+            break;
+        case 1:
+            valor= 0b00000110;
+            break;
+        case 2:
+            valor= 0b01011011;
+            break;
+        case 3:
+            valor= 0b01001111;
+            break;
+        case 4:
+            valor= 0b01100110;
+            break;
+        case 5:
+            valor= 0b01101101;
+            break;
+        case 6:
+            valor= 0b01111101;
+            break;
+        case 7:
+            valor= 0b00000111;
+            break;
+        case 8:
+            valor= 0b01111111;
+            break;
+        case 9:
+            valor= 0b01101111;
+            break;
+        case 10:
+            valor= 0b01110111;
+            break;
+        case 11:
+            valor= 0b01111100;
+            break;
+        case 12:
+            valor= 0b00111001;
+            break;
+        case 13:
+            valor= 0b01011110;
+            break;
+        case 14:
+            valor= 0b01111001;
+            break;
+        case 15:
+            valor= 0b01110001;
+            break;
+            
+    }
+    return valor;
+}
+
+void display(void)
+{
+   
+    switch(banderaT0)
+    {
+        case 1:
+            PORTD= segU;
+            PORTE= 0x01;
+            break;
+        case 2:
+            PORTD= segD;
+            PORTE= 0x02;
+            break;
+        case 3:
+            PORTD= segC;
+            banderaT0 = 0;
+            PORTE= 0x04;
+            break;
+    }
+    
 }
