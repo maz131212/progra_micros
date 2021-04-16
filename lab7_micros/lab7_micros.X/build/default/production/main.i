@@ -2658,9 +2658,9 @@ uint8_t numero;
 uint8_t centenas;
 uint8_t decenas;
 uint8_t unidades;
-int segU;
-int segD;
-int segC;
+uint8_t segU;
+uint8_t segD;
+uint8_t segC;
 uint8_t banderaT0;
 
 
@@ -2670,7 +2670,7 @@ uint8_t banderaT0;
 
 void setup(void);
 void decimales(void);
-int Config_7(int numero7);
+uint8_t Config_7(uint8_t numero7);
 void display(void);
 
 
@@ -2680,6 +2680,26 @@ void __attribute__((picinterrupt(("")))) ISR(void){
 
     if (INTCONbits.RBIF)
     {
+        if (PORTBbits.RB0 == 1)
+    {
+        b_inc = 1;
+    }
+    if (PORTBbits.RB0 == 0 && b_inc == 1)
+    {
+        b_inc = 0;
+        PORTC++;
+    }
+
+    if (PORTBbits.RB1 == 1)
+    {
+       b_dec = 1;
+    }
+    if (PORTBbits.RB1 == 0 && b_dec == 1)
+    {
+        b_dec = 0;
+        PORTC--;
+    }
+
         INTCONbits.RBIF = 0;
 
     }
@@ -2709,26 +2729,6 @@ void main(void)
     while (1)
     {
 
-    if (PORTBbits.RB0 == 1)
-    {
-        b_inc = 1;
-    }
-    if (PORTBbits.RB0 == 0 && b_inc == 1)
-    {
-        b_inc = 0;
-        PORTC++;
-    }
-
-    if (PORTBbits.RB1 == 1)
-    {
-        b_dec = 1;
-    }
-    if (PORTBbits.RB1 == 0 && b_dec == 1)
-    {
-        b_dec = 0;
-        PORTC--;
-    }
-
     decimales();
 
     segU = Config_7(unidades);
@@ -2736,8 +2736,6 @@ void main(void)
     segC = Config_7(centenas);
 
     display();
-
-
 
 
     }
@@ -2749,7 +2747,7 @@ void main(void)
 
 void setup(void) {
 
-    v_tmr0 = 61;
+    v_tmr0 = 150;
 
 
     TRISE = 0;
@@ -2761,7 +2759,7 @@ void setup(void) {
     TRISA = 0;
     PORTA = 0;
 
-    TRISB = 0;
+    TRISB = 0xFF;
     PORTB = 0;
 
     TRISD = 0;
@@ -2780,6 +2778,7 @@ void setup(void) {
 
     IOCBbits.IOCB0 = 1;
     IOCBbits.IOCB1 = 1;
+
 
 
     OPTION_REGbits.T0CS = 0;
@@ -2812,9 +2811,9 @@ void decimales(void)
 }
 
 
-int Config_7(int numero7)
+uint8_t Config_7(uint8_t numero7)
 {
-    int valor, seg;
+    uint8_t valor, seg;
     seg = numero7;
 
     switch(seg)

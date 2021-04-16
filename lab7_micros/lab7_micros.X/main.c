@@ -45,9 +45,9 @@ uint8_t numero;
 uint8_t centenas;
 uint8_t decenas;
 uint8_t unidades;
-int segU;
-int segD;
-int segC;
+uint8_t segU;
+uint8_t segD;
+uint8_t segC;
 uint8_t banderaT0;
 
 
@@ -57,7 +57,7 @@ uint8_t banderaT0;
 //******************************************************************************
 void setup(void);       //Funcion para definir la configuracion inicial
 void decimales(void);
-int Config_7(int numero7);
+uint8_t Config_7(uint8_t numero7);
 void display(void);
 
 //******************************************************************************
@@ -67,6 +67,26 @@ void __interrupt() ISR(void){
     
     if (INTCONbits.RBIF)   //bandera para indicar si hubo un cambio en PORTB 
     {
+        if (PORTBbits.RB0 == 1) 
+    {   
+        b_inc = 1;              
+    }
+    if (PORTBbits.RB0 == 0 && b_inc == 1) 
+    { 
+        b_inc = 0;      
+        PORTC++;        
+    }                   
+
+    if (PORTBbits.RB1 == 1) 
+    {   
+       b_dec = 1;              
+    }
+    if (PORTBbits.RB1 == 0 && b_dec == 1) 
+    {
+        b_dec = 0;       
+        PORTC--;          
+    }  
+        
         INTCONbits.RBIF = 0; 
         
     }
@@ -96,26 +116,6 @@ void main(void)
     while (1) 
     {
         
-    if (PORTBbits.RB0 == 1) 
-    {   
-        b_inc = 1;              
-    }
-    if (PORTBbits.RB0 == 0 && b_inc == 1) 
-    { 
-        b_inc = 0;      
-        PORTC++;        
-    }                   
-
-    if (PORTBbits.RB1 == 1) 
-    {   
-        b_dec = 1;              
-    }
-    if (PORTBbits.RB1 == 0 && b_dec == 1) 
-    {
-        b_dec = 0;       
-        PORTC--;          
-    }   
-    
     decimales();
     
     segU = Config_7(unidades);
@@ -123,9 +123,7 @@ void main(void)
     segC = Config_7(centenas);
     
     display();
-    
-    
-    
+
     
     }
 }
@@ -136,7 +134,7 @@ void main(void)
 
 void setup(void) {
     
-    v_tmr0 = 61; // para 5 ms 236
+    v_tmr0 = 150; // para 5 ms 236
     
     // ENTRADAS Y SALIDAS
     TRISE = 0;  // todos las salidas del puerto E estan en OUTPUT
@@ -148,7 +146,7 @@ void setup(void) {
     TRISA = 0;  // TODO A OUTPUT
     PORTA = 0;  // TODA A APAGADO
     
-    TRISB = 0;  // TODO B OUTPUT
+    TRISB = 0xFF;  // TODO B INPUT
     PORTB = 0;  // TODA B APAGADO
     
     TRISD = 0;  // TODO D OUTPUT
@@ -167,6 +165,7 @@ void setup(void) {
    
     IOCBbits.IOCB0 = 1; //Interrupt-on-change enabled
     IOCBbits.IOCB1 = 1; //Interrupt-on-change enabled
+    
     
     // CONFIGURACION TIMER0
     OPTION_REGbits.T0CS = 0;
@@ -199,9 +198,9 @@ void decimales(void)
 }
 
 
-int Config_7(int numero7)
+uint8_t Config_7(uint8_t numero7)
 {
-    int valor, seg;
+    uint8_t valor, seg;
     seg = numero7;
     
     switch(seg)
