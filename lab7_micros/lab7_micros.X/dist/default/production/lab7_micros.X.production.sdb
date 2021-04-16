@@ -15,18 +15,18 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"66 /Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+"67 /Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
 [v _ISR ISR `II(v  1 e 1 0 ]
-"107
+"103
 [v _main main `(v  1 e 1 0 ]
-"135
+"126
 [v _setup setup `(v  1 e 1 0 ]
-"186
+"172
 [v _decimales decimales `(v  1 e 1 0 ]
-"201
+"186
 [v _Config_7 Config_7 `(uc  1 e 1 0 ]
-"261
-[v _display display `(v  1 e 1 0 ]
+"249
+[v _display3 display3 `(v  1 e 1 0 ]
 "59 /Applications/microchip/mplabx/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8/pic/include/proc/pic16f887.h
 [v _TMR0 TMR0 `VEuc  1 e 1 @1 ]
 "166
@@ -68,7 +68,7 @@
 ]
 [u S36 . 1 `S22 1 . 1 0 `S31 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES36  1 e 1 @11 ]
-[s S131 . 1 `uc 1 PS 1 0 :3:0 
+[s S126 . 1 `uc 1 PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -76,12 +76,12 @@
 `uc 1 nRBPU 1 0 :1:7 
 ]
 "1366
-[s S138 . 1 `uc 1 PS0 1 0 :1:0 
+[s S133 . 1 `uc 1 PS0 1 0 :1:0 
 `uc 1 PS1 1 0 :1:1 
 `uc 1 PS2 1 0 :1:2 
 ]
-[u S142 . 1 `S131 1 . 1 0 `S138 1 . 1 0 ]
-[v _OPTION_REGbits OPTION_REGbits `VES142  1 e 1 @129 ]
+[u S137 . 1 `S126 1 . 1 0 `S133 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES137  1 e 1 @129 ]
 "1416
 [v _TRISA TRISA `VEuc  1 e 1 @133 ]
 "1478
@@ -92,10 +92,10 @@
 [v _TRISD TRISD `VEuc  1 e 1 @136 ]
 "1664
 [v _TRISE TRISE `VEuc  1 e 1 @137 ]
-[s S105 . 1 `uc 1 IOCB 1 0 :8:0 
+[s S100 . 1 `uc 1 IOCB 1 0 :8:0 
 ]
 "2436
-[s S107 . 1 `uc 1 IOCB0 1 0 :1:0 
+[s S102 . 1 `uc 1 IOCB0 1 0 :1:0 
 `uc 1 IOCB1 1 0 :1:1 
 `uc 1 IOCB2 1 0 :1:2 
 `uc 1 IOCB3 1 0 :1:3 
@@ -104,8 +104,8 @@
 `uc 1 IOCB6 1 0 :1:6 
 `uc 1 IOCB7 1 0 :1:7 
 ]
-[u S116 . 1 `S105 1 . 1 0 `S107 1 . 1 0 ]
-[v _IOCBbits IOCBbits `VES116  1 e 1 @150 ]
+[u S111 . 1 `S100 1 . 1 0 `S102 1 . 1 0 ]
+[v _IOCBbits IOCBbits `VES111  1 e 1 @150 ]
 "3387
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
 "3449
@@ -132,25 +132,38 @@
 [v _segC segC `uc  1 e 1 0 ]
 "51
 [v _banderaT0 banderaT0 `uc  1 e 1 0 ]
-"107
+"103
 [v _main main `(v  1 e 1 0 ]
 {
-"129
+"120
 } 0
-"135
+"126
 [v _setup setup `(v  1 e 1 0 ]
 {
-"180
+"166
 } 0
-"261
-[v _display display `(v  1 e 1 0 ]
+"249
+[v _display3 display3 `(v  1 e 1 0 ]
 {
-"281
+"278
 } 0
 "186
+[v _Config_7 Config_7 `(uc  1 e 1 0 ]
+{
+[v Config_7@numero7 numero7 `uc  1 a 1 wreg ]
+"191
+[v Config_7@valor valor `uc  1 a 1 7 ]
+[v Config_7@seg seg `uc  1 a 1 6 ]
+"186
+[v Config_7@numero7 numero7 `uc  1 a 1 wreg ]
+"192
+[v Config_7@numero7 numero7 `uc  1 a 1 5 ]
+"246
+} 0
+"172
 [v _decimales decimales `(v  1 e 1 0 ]
 {
-"198
+"183
 } 0
 "4 /Applications/microchip/xc8/v2.31/pic/sources/c90/common/Umul8.c
 [v ___bmul __bmul `(uc  1 e 1 0 ]
@@ -178,21 +191,8 @@
 [v ___awdiv@dividend dividend `i  1 p 2 5 ]
 "41
 } 0
-"201 /Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-[v _Config_7 Config_7 `(uc  1 e 1 0 ]
-{
-[v Config_7@numero7 numero7 `uc  1 a 1 wreg ]
-"203
-[v Config_7@valor valor `uc  1 a 1 7 ]
-[v Config_7@seg seg `uc  1 a 1 6 ]
-"201
-[v Config_7@numero7 numero7 `uc  1 a 1 wreg ]
-"204
-[v Config_7@numero7 numero7 `uc  1 a 1 5 ]
-"259
-} 0
-"66
+"67 /Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"101
+"97
 } 0

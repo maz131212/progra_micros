@@ -52,50 +52,46 @@ uint8_t banderaT0;
 
 
 
+
 //******************************************************************************
 // Prototipos de funciones
 //******************************************************************************
 void setup(void);       //Funcion para definir la configuracion inicial
 void decimales(void);
 uint8_t Config_7(uint8_t numero7);
-void display(void);
+void display3(void);
 
 //******************************************************************************
 // Vector de interrupción
 //******************************************************************************
 void __interrupt() ISR(void){
     
-    if (INTCONbits.RBIF)   //bandera para indicar si hubo un cambio en PORTB 
+    // INTERRUPT ON CHANGE 
+    if (INTCONbits.RBIF)   
     {
-        if (PORTBbits.RB0 == 1) 
-    {   
-        b_inc = 1;              
-    }
-    if (PORTBbits.RB0 == 0 && b_inc == 1) 
-    { 
-        b_inc = 0;      
-        PORTC++;        
-    }                   
+        if (PORTBbits.RB0 == 1) {b_inc = 1;}
+        if (PORTBbits.RB0 == 0 && b_inc == 1) 
+            { 
+                b_inc = 0;      
+                PORTC++;        
+            }                   
 
-    if (PORTBbits.RB1 == 1) 
-    {   
-       b_dec = 1;              
-    }
-    if (PORTBbits.RB1 == 0 && b_dec == 1) 
-    {
-        b_dec = 0;       
-        PORTC--;          
-    }  
-        
-        INTCONbits.RBIF = 0; 
-        
+        if (PORTBbits.RB1 == 1){b_dec = 1;}
+        if (PORTBbits.RB1 == 0 && b_dec == 1) 
+            {
+                b_dec = 0;       
+                PORTC--;          
+            }  
+
+        INTCONbits.RBIF = 0;   
     }
     
+    // INTERRUPCION DEL TIMER0
     if (INTCONbits.T0IF)
-    {
-        banderaT0++;
-        INTCONbits.T0IF = 0;
-        TMR0 = v_tmr0;
+    { 
+        banderaT0++;            //incrementar una bandera
+        INTCONbits.T0IF = 0;    //apagar la bandera del Timer0
+        TMR0 = v_tmr0;          //reiniciar Timer0
     }
     
 }
@@ -107,7 +103,7 @@ void __interrupt() ISR(void){
 void main(void) 
 {
 
-    setup();
+    setup();    //configuracion
 
     //**************************************************************************
     // Loop Principal
@@ -116,14 +112,9 @@ void main(void)
     while (1) 
     {
         
-    decimales();
+    decimales(); //convertir a decimal
     
-    segU = Config_7(unidades);
-    segD = Config_7(decenas);
-    segC = Config_7(centenas);
-    
-    display();
-
+    display3();   //mostrar el valor en el 7 segmentos
     
     }
 }
@@ -134,48 +125,43 @@ void main(void)
 
 void setup(void) {
     
-    v_tmr0 = 150; // para 5 ms 236
+    // CONFIGURACION INICIAR
+    v_tmr0 = 236; // para 5 ms 236
     
     // ENTRADAS Y SALIDAS
-    TRISE = 0;  // todos las salidas del puerto E estan en OUTPUT
-    PORTE = 0;  // Todos los puertos de E empiezan apagados
-    
-    TRISC = 0;  // TODO C esta en OUTPUT
-    PORTC = 0;  // TODO C empieza apagado
-    
     TRISA = 0;  // TODO A OUTPUT
-    PORTA = 0;  // TODA A APAGADO
-    
-    TRISB = 0xFF;  // TODO B INPUT
+    PORTA = 0;  // TODA A APAGADO 
+    TRISB=0xFF; // TODO B INPUT
     PORTB = 0;  // TODA B APAGADO
-    
+    TRISC = 0;  // TODO C OUTPUT
+    PORTC = 0;  // TODA C APAGADO
     TRISD = 0;  // TODO D OUTPUT
-    PORTD = 0;  // TODO D EMPIEZA APAGADO
-    
+    PORTD = 0;  // TODO D APAGADO
+    TRISE = 0;  // TODO E OUTPUT
+    PORTE = 0;  // TODA E APAGADO
     ANSEL = 0;  // PARA NO USARLO COMO ANALOGICO
     ANSELH = 0; // PARA NO USARLO COMO ANALOGICO
     
-    // INTERRUPCIONES
-    INTCONbits.GIE = 1; //Enables all unmasked interrupts
-    INTCONbits.RBIE = 1;
-    INTCONbits.T0IE = 1;
     
-    INTCONbits.RBIF = 0;
-    INTCONbits.T0IF = 0;
+    // INTERRUPCIONES
+    INTCONbits.GIE = 1;  //Habilitar Interrupciones Globales
+    INTCONbits.RBIE = 1; //Habilitar IOC
+    INTCONbits.T0IE = 1; //Habilitar Interrupciones Timer0
+    
+    INTCONbits.RBIF = 0; //Apagar bandera IOC
+    INTCONbits.T0IF = 0; //Apagar bandera Timer0
    
-    IOCBbits.IOCB0 = 1; //Interrupt-on-change enabled
-    IOCBbits.IOCB1 = 1; //Interrupt-on-change enabled
+    IOCBbits.IOCB0 = 1; //Interrupt-on-change enabled PB0
+    IOCBbits.IOCB1 = 1; //Interrupt-on-change enabled PB1
     
     
     // CONFIGURACION TIMER0
-    OPTION_REGbits.T0CS = 0;
-    OPTION_REGbits.PSA = 0;
-    OPTION_REGbits.PS2 = 1;
-    OPTION_REGbits.PS1 = 1;
-    OPTION_REGbits.PS0 = 1;
-    TMR0 = v_tmr0;
-   
-            
+    OPTION_REGbits.T0CS = 0; //Oscilador interno
+    OPTION_REGbits.PSA = 0;  //Habilitar Prescaler
+    OPTION_REGbits.PS2 = 1;  //Prescaler 111 = 256
+    OPTION_REGbits.PS1 = 1;  
+    OPTION_REGbits.PS0 = 1;  
+    TMR0 = v_tmr0;           //Reiniciar Timer0 
             
 }
 
@@ -185,14 +171,13 @@ void setup(void) {
 
 void decimales(void)
 {
+    //convierte un valor en binario de 8 bits (en el PUERTO C)
+    //a decimal de tres digitos (centenas, decenas, unidades)
+    
     numero = PORTC;
-    
     centenas = numero / 100;
-    
     numero = numero - (centenas*100);
-    
     decenas = numero / 10;
-    
     unidades = numero - (decenas*10);
 
 }
@@ -200,6 +185,9 @@ void decimales(void)
 
 uint8_t Config_7(uint8_t numero7)
 {
+    //recibe un valor de 8 bits que se desea ver en el 7 segmentos
+    //devulve el valor apropiado para usar en un 7 segmentos
+    
     uint8_t valor, seg;
     seg = numero7;
     
@@ -252,29 +240,38 @@ uint8_t Config_7(uint8_t numero7)
             break;
         case 15:
             valor= 0b01110001;
-            break;
-            
+            break;     
     }
     return valor;
 }
 
-void display(void)
+
+void display3(void)
 {
+    //muestra el valor del numero en decimal en 3 7segmentos
    
     switch(banderaT0)
     {
         case 1:
-            PORTD= segU;
-            PORTE= 0x01;
+            PORTD = 0;      //Borrar el Puerto D
+            PORTE = 0x01;   //Habiliar el 7seg
+            segU = Config_7(unidades);  //busacar el valor del 7seg
+            PORTD = segU;   //Mostrar el valor en el 7seg
             break;
+            
         case 2:
+            PORTD = 0;
+            PORTE = 0x02;
+            segD = Config_7(decenas);
             PORTD= segD;
-            PORTE= 0x02;
             break;
+            
         case 3:
+            PORTD = 0;
+            PORTE = 0x04;
+            segC = Config_7(centenas);
             PORTD= segC;
             banderaT0 = 0;
-            PORTE= 0x04;
             break;
     }
     

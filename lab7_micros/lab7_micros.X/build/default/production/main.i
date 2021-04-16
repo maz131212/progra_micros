@@ -2668,41 +2668,37 @@ uint8_t banderaT0;
 
 
 
+
 void setup(void);
 void decimales(void);
 uint8_t Config_7(uint8_t numero7);
-void display(void);
+void display3(void);
 
 
 
 
 void __attribute__((picinterrupt(("")))) ISR(void){
 
+
     if (INTCONbits.RBIF)
     {
-        if (PORTBbits.RB0 == 1)
-    {
-        b_inc = 1;
-    }
-    if (PORTBbits.RB0 == 0 && b_inc == 1)
-    {
-        b_inc = 0;
-        PORTC++;
-    }
+        if (PORTBbits.RB0 == 1) {b_inc = 1;}
+        if (PORTBbits.RB0 == 0 && b_inc == 1)
+            {
+                b_inc = 0;
+                PORTC++;
+            }
 
-    if (PORTBbits.RB1 == 1)
-    {
-       b_dec = 1;
-    }
-    if (PORTBbits.RB1 == 0 && b_dec == 1)
-    {
-        b_dec = 0;
-        PORTC--;
-    }
+        if (PORTBbits.RB1 == 1){b_dec = 1;}
+        if (PORTBbits.RB1 == 0 && b_dec == 1)
+            {
+                b_dec = 0;
+                PORTC--;
+            }
 
         INTCONbits.RBIF = 0;
-
     }
+
 
     if (INTCONbits.T0IF)
     {
@@ -2731,12 +2727,7 @@ void main(void)
 
     decimales();
 
-    segU = Config_7(unidades);
-    segD = Config_7(decenas);
-    segC = Config_7(centenas);
-
-    display();
-
+    display3();
 
     }
 }
@@ -2747,26 +2738,23 @@ void main(void)
 
 void setup(void) {
 
-    v_tmr0 = 150;
 
+    v_tmr0 = 236;
 
-    TRISE = 0;
-    PORTE = 0;
-
-    TRISC = 0;
-    PORTC = 0;
 
     TRISA = 0;
     PORTA = 0;
-
-    TRISB = 0xFF;
+    TRISB=0xFF;
     PORTB = 0;
-
+    TRISC = 0;
+    PORTC = 0;
     TRISD = 0;
     PORTD = 0;
-
+    TRISE = 0;
+    PORTE = 0;
     ANSEL = 0;
     ANSELH = 0;
+
 
 
     INTCONbits.GIE = 1;
@@ -2788,8 +2776,6 @@ void setup(void) {
     OPTION_REGbits.PS0 = 1;
     TMR0 = v_tmr0;
 
-
-
 }
 
 
@@ -2798,14 +2784,13 @@ void setup(void) {
 
 void decimales(void)
 {
+
+
+
     numero = PORTC;
-
     centenas = numero / 100;
-
     numero = numero - (centenas*100);
-
     decenas = numero / 10;
-
     unidades = numero - (decenas*10);
 
 }
@@ -2813,6 +2798,9 @@ void decimales(void)
 
 uint8_t Config_7(uint8_t numero7)
 {
+
+
+
     uint8_t valor, seg;
     seg = numero7;
 
@@ -2866,28 +2854,37 @@ uint8_t Config_7(uint8_t numero7)
         case 15:
             valor= 0b01110001;
             break;
-
     }
     return valor;
 }
 
-void display(void)
+
+void display3(void)
 {
+
 
     switch(banderaT0)
     {
         case 1:
-            PORTD= segU;
-            PORTE= 0x01;
+            PORTD = 0;
+            PORTE = 0x01;
+            segU = Config_7(unidades);
+            PORTD = segU;
             break;
+
         case 2:
+            PORTD = 0;
+            PORTE = 0x02;
+            segD = Config_7(decenas);
             PORTD= segD;
-            PORTE= 0x02;
             break;
+
         case 3:
+            PORTD = 0;
+            PORTE = 0x04;
+            segC = Config_7(centenas);
             PORTD= segC;
             banderaT0 = 0;
-            PORTE= 0x04;
             break;
     }
 
