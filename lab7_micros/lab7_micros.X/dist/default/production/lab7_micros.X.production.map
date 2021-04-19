@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=/Applications/microchip/xc8/v2.31/pic/dat/en_msgs.txt -cn \
   -h+dist/default/production/lab7_micros.X.production.sym \
   --cmf=dist/default/production/lab7_micros.X.production.cmf -z -Q16F887 \
-  -o/tmp/xcYxM6Lwq --defsym=__MPLAB_BUILD=1 \
+  -o/tmp/xcFdh2WDR --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/lab7_micros.X.production.map -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ASTACK=0110h-016Fh -pstack=STACK \
   -ACODE=00h-07FFhx4 -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 \
@@ -18,7 +18,7 @@ Linker command line:
   -AEEDATA=00h-0FFh/02100h -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 \
   -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 \
   -preset_vec=00h,intentry=04h,init,end_init -ppowerup=CODE -pcinit=CODE \
-  -pfunctab=ENTRY -k /tmp/xcid8tLjE.o \
+  -pfunctab=ENTRY -k /tmp/xc8fs1J6w.o \
   dist/default/production/lab7_micros.X.production.o 
 
 Object code version is 3.11
@@ -28,7 +28,7 @@ Machine type is 16F887
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-/tmp/xcid8tLjE.o
+/tmp/xc8fs1J6w.o
                 end_init                              C        C        3        8       0
                 reset_vec                             0        0        3        0       0
                 config                             2007     2007        2        0       4
@@ -333,7 +333,7 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 103 in file "main.c"
+		line 104 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -364,7 +364,7 @@ Total ram usage:        0 bytes
 
  *************** function _setup *****************
  Defined at:
-		line 126 in file "main.c"
+		line 127 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -394,7 +394,7 @@ Total ram usage:        1 bytes
 
  *************** function _display3 *****************
  Defined at:
-		line 249 in file "main.c"
+		line 250 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -424,7 +424,7 @@ Total ram usage:        2 bytes
 
  *************** function _Config_7 *****************
  Defined at:
-		line 186 in file "main.c"
+		line 187 in file "main.c"
  Parameters:    Size  Location     Type
   numero7         1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -456,7 +456,7 @@ Total ram usage:        5 bytes
 
  *************** function _decimales *****************
  Defined at:
-		line 172 in file "main.c"
+		line 173 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -552,7 +552,7 @@ Total ram usage:        9 bytes
 
  *************** function _ISR *****************
  Defined at:
-		line 67 in file "main.c"
+		line 68 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type

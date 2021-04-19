@@ -15,17 +15,17 @@
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"67 /Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+"68 /Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
 [v _ISR ISR `II(v  1 e 1 0 ]
-"103
+"104
 [v _main main `(v  1 e 1 0 ]
-"126
+"127
 [v _setup setup `(v  1 e 1 0 ]
-"172
+"173
 [v _decimales decimales `(v  1 e 1 0 ]
-"186
+"187
 [v _Config_7 Config_7 `(uc  1 e 1 0 ]
-"249
+"250
 [v _display3 display3 `(v  1 e 1 0 ]
 "59 /Applications/microchip/mplabx/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8/pic/include/proc/pic16f887.h
 [v _TMR0 TMR0 `VEuc  1 e 1 @1 ]
@@ -110,60 +110,60 @@
 [v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
 "3449
 [v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
-"40 /Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+"41 /Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
 [v _v_tmr0 v_tmr0 `uc  1 e 1 0 ]
-"42
-[v _b_inc b_inc `uc  1 e 1 0 ]
 "43
-[v _b_dec b_dec `uc  1 e 1 0 ]
+[v _b_inc b_inc `uc  1 e 1 0 ]
 "44
-[v _numero numero `uc  1 e 1 0 ]
+[v _b_dec b_dec `uc  1 e 1 0 ]
 "45
-[v _centenas centenas `uc  1 e 1 0 ]
+[v _numero numero `uc  1 e 1 0 ]
 "46
-[v _decenas decenas `uc  1 e 1 0 ]
+[v _centenas centenas `uc  1 e 1 0 ]
 "47
-[v _unidades unidades `uc  1 e 1 0 ]
+[v _decenas decenas `uc  1 e 1 0 ]
 "48
-[v _segU segU `uc  1 e 1 0 ]
+[v _unidades unidades `uc  1 e 1 0 ]
 "49
-[v _segD segD `uc  1 e 1 0 ]
+[v _segU segU `uc  1 e 1 0 ]
 "50
-[v _segC segC `uc  1 e 1 0 ]
+[v _segD segD `uc  1 e 1 0 ]
 "51
+[v _segC segC `uc  1 e 1 0 ]
+"52
 [v _banderaT0 banderaT0 `uc  1 e 1 0 ]
-"103
+"104
 [v _main main `(v  1 e 1 0 ]
 {
-"120
+"121
 } 0
-"126
+"127
 [v _setup setup `(v  1 e 1 0 ]
 {
-"166
+"167
 } 0
-"249
+"250
 [v _display3 display3 `(v  1 e 1 0 ]
 {
-"278
+"279
 } 0
-"186
+"187
 [v _Config_7 Config_7 `(uc  1 e 1 0 ]
 {
 [v Config_7@numero7 numero7 `uc  1 a 1 wreg ]
-"191
+"192
 [v Config_7@valor valor `uc  1 a 1 7 ]
 [v Config_7@seg seg `uc  1 a 1 6 ]
-"186
+"187
 [v Config_7@numero7 numero7 `uc  1 a 1 wreg ]
-"192
+"193
 [v Config_7@numero7 numero7 `uc  1 a 1 5 ]
-"246
+"247
 } 0
-"172
+"173
 [v _decimales decimales `(v  1 e 1 0 ]
 {
-"183
+"184
 } 0
 "4 /Applications/microchip/xc8/v2.31/pic/sources/c90/common/Umul8.c
 [v ___bmul __bmul `(uc  1 e 1 0 ]
@@ -191,8 +191,8 @@
 [v ___awdiv@dividend dividend `i  1 p 2 5 ]
 "41
 } 0
-"67 /Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+"68 /Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"97
+"98
 } 0

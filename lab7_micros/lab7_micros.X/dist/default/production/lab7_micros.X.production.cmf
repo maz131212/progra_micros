@@ -28,7 +28,7 @@ intentry CODE 0 4 4 8 2
 bssBANK0 BANK0 1 2C 2C 4 1
 bssCOMMON COMMON 1 78 78 3 1
 config CONFIG 4 2007 2007 2 2
-$/tmp/xcid8tLjE.o
+$/tmp/xc8fs1J6w.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 C C 3 2
 config CONFIG 4 2007 2007 2 2
@@ -78,37 +78,37 @@ STRING 25A-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production/lab7_micros.X.production.o
-F cinit CODE >495:/tmp/xcDMByu2M.s
-F cinit CODE >498:/tmp/xcDMByu2M.s
-F cinit CODE >530:/tmp/xcDMByu2M.s
-10 cinit CODE >531:/tmp/xcDMByu2M.s
-11 cinit CODE >532:/tmp/xcDMByu2M.s
-12 cinit CODE >535:/tmp/xcDMByu2M.s
-13 cinit CODE >536:/tmp/xcDMByu2M.s
-14 cinit CODE >537:/tmp/xcDMByu2M.s
-15 cinit CODE >538:/tmp/xcDMByu2M.s
-16 cinit CODE >539:/tmp/xcDMByu2M.s
-17 cinit CODE >540:/tmp/xcDMByu2M.s
-18 cinit CODE >546:/tmp/xcDMByu2M.s
-18 cinit CODE >548:/tmp/xcDMByu2M.s
-19 cinit CODE >549:/tmp/xcDMByu2M.s
-4 intentry CODE >67:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1B5 text7 CODE >67:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1B5 text7 CODE >70:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1B9 text7 CODE >72:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1C1 text7 CODE >73:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1CA text7 CODE >75:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1CB text7 CODE >76:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1CF text7 CODE >79:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1D5 text7 CODE >80:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1DE text7 CODE >82:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1DF text7 CODE >83:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1E1 text7 CODE >86:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1E2 text7 CODE >90:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1E6 text7 CODE >92:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1EC text7 CODE >93:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1ED text7 CODE >94:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1EF text7 CODE >97:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+F cinit CODE >495:/tmp/xcPGmRNXS.s
+F cinit CODE >498:/tmp/xcPGmRNXS.s
+F cinit CODE >530:/tmp/xcPGmRNXS.s
+10 cinit CODE >531:/tmp/xcPGmRNXS.s
+11 cinit CODE >532:/tmp/xcPGmRNXS.s
+12 cinit CODE >535:/tmp/xcPGmRNXS.s
+13 cinit CODE >536:/tmp/xcPGmRNXS.s
+14 cinit CODE >537:/tmp/xcPGmRNXS.s
+15 cinit CODE >538:/tmp/xcPGmRNXS.s
+16 cinit CODE >539:/tmp/xcPGmRNXS.s
+17 cinit CODE >540:/tmp/xcPGmRNXS.s
+18 cinit CODE >546:/tmp/xcPGmRNXS.s
+18 cinit CODE >548:/tmp/xcPGmRNXS.s
+19 cinit CODE >549:/tmp/xcPGmRNXS.s
+4 intentry CODE >68:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1B5 text7 CODE >68:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1B5 text7 CODE >71:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1B9 text7 CODE >73:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1C1 text7 CODE >74:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1CA text7 CODE >76:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1CB text7 CODE >77:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1CF text7 CODE >80:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1D5 text7 CODE >81:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1DE text7 CODE >83:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1DF text7 CODE >84:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1E1 text7 CODE >87:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1E2 text7 CODE >91:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1E6 text7 CODE >93:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1EC text7 CODE >94:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1ED text7 CODE >95:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1EF text7 CODE >98:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
 AE text6 CODE >5:/Applications/microchip/xc8/v2.31/pic/sources/c90/common/awdiv.c
 AE text6 CODE >13:/Applications/microchip/xc8/v2.31/pic/sources/c90/common/awdiv.c
 B1 text6 CODE >14:/Applications/microchip/xc8/v2.31/pic/sources/c90/common/awdiv.c
@@ -143,104 +143,104 @@ FB text6 CODE >35:/Applications/microchip/xc8/v2.31/pic/sources/c90/common/awdiv
 240 text5 CODE >47:/Applications/microchip/xc8/v2.31/pic/sources/c90/common/Umul8.c
 245 text5 CODE >50:/Applications/microchip/xc8/v2.31/pic/sources/c90/common/Umul8.c
 246 text5 CODE >51:/Applications/microchip/xc8/v2.31/pic/sources/c90/common/Umul8.c
-117 text4 CODE >172:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-117 text4 CODE >177:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-11D text4 CODE >178:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-133 text4 CODE >179:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-143 text4 CODE >180:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-159 text4 CODE >181:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-169 text4 CODE >183:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1C text3 CODE >186:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1D text3 CODE >192:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-21 text3 CODE >194:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-22 text3 CODE >197:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-26 text3 CODE >198:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-27 text3 CODE >200:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-2B text3 CODE >201:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-2C text3 CODE >203:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-30 text3 CODE >204:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-31 text3 CODE >206:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-35 text3 CODE >207:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-36 text3 CODE >209:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-3A text3 CODE >210:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-3B text3 CODE >212:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-3F text3 CODE >213:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-40 text3 CODE >215:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-44 text3 CODE >216:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-45 text3 CODE >218:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-49 text3 CODE >219:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-4A text3 CODE >221:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-4E text3 CODE >222:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-4F text3 CODE >224:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-53 text3 CODE >225:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-54 text3 CODE >227:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-58 text3 CODE >228:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-59 text3 CODE >230:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-5D text3 CODE >231:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-5E text3 CODE >233:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-62 text3 CODE >234:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-63 text3 CODE >236:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-67 text3 CODE >237:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-68 text3 CODE >239:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-6C text3 CODE >240:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-6D text3 CODE >242:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-71 text3 CODE >243:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-72 text3 CODE >244:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-AC text3 CODE >245:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-AD text3 CODE >246:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-16A text2 CODE >249:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-16A text2 CODE >253:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-16B text2 CODE >256:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-16C text2 CODE >257:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-16E text2 CODE >258:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-179 text2 CODE >259:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-17B text2 CODE >260:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-17C text2 CODE >263:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-17D text2 CODE >264:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-17F text2 CODE >265:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-18A text2 CODE >266:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-18C text2 CODE >267:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-18D text2 CODE >270:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-18E text2 CODE >271:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-190 text2 CODE >272:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-19B text2 CODE >273:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-19D text2 CODE >274:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-19E text2 CODE >275:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-19F text2 CODE >276:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1B4 text2 CODE >278:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1F6 text1 CODE >126:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1F6 text1 CODE >129:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1FC text1 CODE >132:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-1FF text1 CODE >133:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-202 text1 CODE >134:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-206 text1 CODE >135:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-209 text1 CODE >136:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-20C text1 CODE >137:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-20F text1 CODE >138:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-212 text1 CODE >139:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-215 text1 CODE >140:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-218 text1 CODE >141:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-21B text1 CODE >142:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-21E text1 CODE >143:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-21F text1 CODE >147:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-220 text1 CODE >148:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-221 text1 CODE >149:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-222 text1 CODE >151:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-223 text1 CODE >152:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-224 text1 CODE >154:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-227 text1 CODE >155:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-228 text1 CODE >159:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-229 text1 CODE >160:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-22A text1 CODE >161:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-22B text1 CODE >162:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-22C text1 CODE >163:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-22D text1 CODE >164:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-231 text1 CODE >166:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-247 maintext CODE >103:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-247 maintext CODE >106:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-24C maintext CODE >112:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-24C maintext CODE >115:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
-251 maintext CODE >117:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+117 text4 CODE >173:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+117 text4 CODE >178:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+11D text4 CODE >179:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+133 text4 CODE >180:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+143 text4 CODE >181:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+159 text4 CODE >182:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+169 text4 CODE >184:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1C text3 CODE >187:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1D text3 CODE >193:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+21 text3 CODE >195:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+22 text3 CODE >198:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+26 text3 CODE >199:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+27 text3 CODE >201:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+2B text3 CODE >202:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+2C text3 CODE >204:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+30 text3 CODE >205:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+31 text3 CODE >207:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+35 text3 CODE >208:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+36 text3 CODE >210:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+3A text3 CODE >211:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+3B text3 CODE >213:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+3F text3 CODE >214:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+40 text3 CODE >216:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+44 text3 CODE >217:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+45 text3 CODE >219:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+49 text3 CODE >220:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+4A text3 CODE >222:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+4E text3 CODE >223:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+4F text3 CODE >225:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+53 text3 CODE >226:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+54 text3 CODE >228:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+58 text3 CODE >229:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+59 text3 CODE >231:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+5D text3 CODE >232:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+5E text3 CODE >234:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+62 text3 CODE >235:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+63 text3 CODE >237:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+67 text3 CODE >238:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+68 text3 CODE >240:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+6C text3 CODE >241:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+6D text3 CODE >243:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+71 text3 CODE >244:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+72 text3 CODE >245:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+AC text3 CODE >246:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+AD text3 CODE >247:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+16A text2 CODE >250:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+16A text2 CODE >254:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+16B text2 CODE >257:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+16C text2 CODE >258:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+16E text2 CODE >259:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+179 text2 CODE >260:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+17B text2 CODE >261:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+17C text2 CODE >264:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+17D text2 CODE >265:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+17F text2 CODE >266:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+18A text2 CODE >267:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+18C text2 CODE >268:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+18D text2 CODE >271:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+18E text2 CODE >272:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+190 text2 CODE >273:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+19B text2 CODE >274:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+19D text2 CODE >275:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+19E text2 CODE >276:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+19F text2 CODE >277:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1B4 text2 CODE >279:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1F6 text1 CODE >127:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1F6 text1 CODE >130:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1FC text1 CODE >133:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+1FF text1 CODE >134:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+202 text1 CODE >135:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+206 text1 CODE >136:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+209 text1 CODE >137:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+20C text1 CODE >138:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+20F text1 CODE >139:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+212 text1 CODE >140:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+215 text1 CODE >141:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+218 text1 CODE >142:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+21B text1 CODE >143:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+21E text1 CODE >144:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+21F text1 CODE >148:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+220 text1 CODE >149:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+221 text1 CODE >150:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+222 text1 CODE >152:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+223 text1 CODE >153:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+224 text1 CODE >155:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+227 text1 CODE >156:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+228 text1 CODE >160:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+229 text1 CODE >161:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+22A text1 CODE >162:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+22B text1 CODE >163:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+22C text1 CODE >164:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+22D text1 CODE >165:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+231 text1 CODE >167:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+247 maintext CODE >104:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+247 maintext CODE >107:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+24C maintext CODE >113:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+24C maintext CODE >116:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
+251 maintext CODE >118:/Users/axelmazariegos/Documents/GitHub/progra_micros/lab7_micros/lab7_micros.X/main.c
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -263,13 +263,13 @@ __Hspace_4 4010 0 ABS 0 - -
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
 _TMR0 1 0 ABS 0 - dist/default/production/lab7_micros.X.production.o
-___sp 0 0 STACK 2 stack /tmp/xcid8tLjE.o
+___sp 0 0 STACK 2 stack /tmp/xc8fs1J6w.o
 _main 48E 0 CODE 0 maintext dist/default/production/lab7_micros.X.production.o
 _segC 2D 0 BANK0 1 bssBANK0 dist/default/production/lab7_micros.X.production.o
 _segD 2E 0 BANK0 1 bssBANK0 dist/default/production/lab7_micros.X.production.o
 _segU 78 0 COMMON 1 bssCOMMON dist/default/production/lab7_micros.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production/lab7_micros.X.production.o
-start 18 0 CODE 0 init /tmp/xcid8tLjE.o
+start 18 0 CODE 0 init /tmp/xc8fs1J6w.o
 __size_of___awdiv 0 0 ABS 0 - dist/default/production/lab7_micros.X.production.o
 __size_of_main 0 0 ABS 0 - dist/default/production/lab7_micros.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
@@ -278,12 +278,12 @@ __Hpowerup 0 0 CODE 0 powerup -
 _display3 2D4 0 CODE 0 text2 dist/default/production/lab7_micros.X.production.o
 __end_of_decimales 2D4 0 CODE 0 text4 dist/default/production/lab7_micros.X.production.o
 __size_of_decimales 0 0 ABS 0 - dist/default/production/lab7_micros.X.production.o
-intlevel0 0 0 ENTRY 0 functab /tmp/xcid8tLjE.o
-intlevel1 0 0 ENTRY 0 functab /tmp/xcid8tLjE.o
-intlevel2 0 0 ENTRY 0 functab /tmp/xcid8tLjE.o
-intlevel3 0 0 ENTRY 0 functab /tmp/xcid8tLjE.o
-intlevel4 0 0 ENTRY 0 functab /tmp/xcid8tLjE.o
-intlevel5 0 0 ENTRY 0 functab /tmp/xcid8tLjE.o
+intlevel0 0 0 ENTRY 0 functab /tmp/xc8fs1J6w.o
+intlevel1 0 0 ENTRY 0 functab /tmp/xc8fs1J6w.o
+intlevel2 0 0 ENTRY 0 functab /tmp/xc8fs1J6w.o
+intlevel3 0 0 ENTRY 0 functab /tmp/xc8fs1J6w.o
+intlevel4 0 0 ENTRY 0 functab /tmp/xc8fs1J6w.o
+intlevel5 0 0 ENTRY 0 functab /tmp/xc8fs1J6w.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 ___bmul@multiplicand 73 0 COMMON 1 cstackCOMMON dist/default/production/lab7_micros.X.production.o
 __end_of_display3 36A 0 CODE 0 text2 dist/default/production/lab7_micros.X.production.o
@@ -302,14 +302,14 @@ __LnvBANK0 0 0 ABS 0 nvBANK0 -
 ___bmul@multiplier 76 0 COMMON 1 cstackCOMMON dist/default/production/lab7_micros.X.production.o
 ___awdiv@divisor 73 0 COMMON 1 cstackCOMMON dist/default/production/lab7_micros.X.production.o
 __end_of___awdiv 22E 0 CODE 0 text6 dist/default/production/lab7_micros.X.production.o
-___stackhi 0 0 ABS 0 - /tmp/xcid8tLjE.o
-___stacklo 0 0 ABS 0 - /tmp/xcid8tLjE.o
+___stackhi 0 0 ABS 0 - /tmp/xc8fs1J6w.o
+___stacklo 0 0 ABS 0 - /tmp/xc8fs1J6w.o
 __size_of_Config_7 0 0 ABS 0 - dist/default/production/lab7_micros.X.production.o
 __size_of_setup 0 0 ABS 0 - dist/default/production/lab7_micros.X.production.o
 Config_7@numero7 75 0 COMMON 1 cstackCOMMON dist/default/production/lab7_micros.X.production.o
 start_initialization 1E 0 CODE 0 cinit dist/default/production/lab7_micros.X.production.o
 __pcstackBANK0 20 0 BANK0 1 cstackBANK0 dist/default/production/lab7_micros.X.production.o
-___int_sp 0 0 STACK 2 stack /tmp/xcid8tLjE.o
+___int_sp 0 0 STACK 2 stack /tmp/xc8fs1J6w.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -359,7 +359,7 @@ saved_w 7E 0 ABS 0 - dist/default/production/lab7_micros.X.production.o
 __end_of_ISR 3EC 0 CODE 0 text7 dist/default/production/lab7_micros.X.production.o
 __HnvBANK0 0 0 ABS 0 nvBANK0 -
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec /tmp/xcid8tLjE.o
+reset_vec 0 0 CODE 0 reset_vec /tmp/xc8fs1J6w.o
 __size_of___bmul 0 0 ABS 0 - dist/default/production/lab7_micros.X.production.o
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
 ___awdiv 15C 0 CODE 0 text6 dist/default/production/lab7_micros.X.production.o
