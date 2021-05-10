@@ -2630,7 +2630,7 @@ typedef uint16_t uintptr_t;
 
 
 
-#pragma config FOSC = XT
+#pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
 #pragma config MCLRE = OFF
@@ -2650,9 +2650,9 @@ typedef uint16_t uintptr_t;
 
 
 
-uint8_t bandera;
 char caracter;
-
+char recibido;
+uint8_t bandera;
 
 
 
@@ -2660,25 +2660,22 @@ char caracter;
 
 void setup(void);
 void mostrar(char caracter);
+char recibir();
+void cadena(char *direccion);
 
 
 
 
-void __attribute__((picinterrupt(("")))) ISR(void){
 
+void __attribute__((picinterrupt(("")))) ISR(void) {
 
-    if (PIR1bits.RCIF)
-    {
-        PORTB = RCREG;
-    }
 }
 
 
 
 
 
-void main(void)
-{
+void main(void) {
 
     setup();
 
@@ -2686,16 +2683,49 @@ void main(void)
 
 
 
-    while (1)
-    {
-        if(PIR1bits.TXIF){
-            TXREG = 'c';
+    while (1) {
+        cadena("\r Que accion desea ejecutar? \r");
+        cadena(" 1) Desplegar cadena de caracteres \r");
+        cadena(" 2) Cambiar PORTA \r");
+        cadena(" 3) Cambiar PORTB \r ");
+
+        bandera = 1;
+
+        while (bandera) {
+
+            while (PIR1bits.RCIF == 0);
+
+            caracter = recibir();
+
+            switch (caracter) {
+                case ('1'):
+                    cadena("\r Hola mundo \r");
+                    bandera = 0;
+                    break;
+
+                case ('2'):
+                    cadena("\r Ingrese un caracter para el puerto A: ");
+                    while (PIR1bits.RCIF == 0);
+                    PORTA = recibir();
+                    mostrar(recibido);
+                    cadena("\r Listo \r");
+                    bandera = 0;
+                    break;
+
+                case ('3'):
+                    cadena("\r Ingrese un caracter para el puerto B: ");
+                    while (PIR1bits.RCIF == 0);
+                    PORTB = recibir();
+                    mostrar(recibido);
+                    cadena("\r Listo \r");
+                    bandera = 0;
+                    break;
+
+                default:
+                    cadena("!!!!!!!!ERROR!!!!!!! \r");
+                    cadena(" Debe ingresar solo '1' '2' o '3' \r");
+            }
         }
-        _delay((unsigned long)((500)*(8000000/4000.0)));
-
-
-
-
 
     }
 }
@@ -2720,17 +2750,11 @@ void setup(void) {
     PORTE = 0;
     ANSEL = 0;
     ANSELH = 0;
-# 119 "main.c"
-    PIE1bits.RCIE = 1;
 
 
-    INTCONbits.PEIE = 1;
-    INTCONbits.GIE = 1;
-
-
-
-
-
+    OSCCONbits.IRCF = 0b0111;
+    OSCCONbits.SCS = 1;
+# 158 "main.c"
     TXSTAbits.SYNC = 0;
     TXSTAbits.BRGH = 1;
     BAUDCTLbits.BRG16 = 1;
@@ -2749,7 +2773,19 @@ void setup(void) {
 
 
 
- void mostrar(char caracter){
+void mostrar(char caracteres) {
+    while (TXSTAbits.TRMT == 0);
+    TXREG = caracteres;
+}
 
-        TXREG = caracter;
+char recibir() {
+    recibido = RCREG;
+    return recibido;
+}
+
+void cadena(char *direccion) {
+    while (*direccion != '\0') {
+        mostrar(*direccion);
+        direccion++;
     }
+}
